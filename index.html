@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>EduZone - Đấu Trường Tri Thức</title>
   
-  <!-- FAVICON ICON CHO TRÌNH DUYỆT TRÊN PC & ĐIỆN THOẠI -->
+  <!-- FAVICON ICON -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='30' fill='%236941F2'/%3E%3Cpath d='M50 35 L28 45 L50 55 L72 45 Z' fill='%23FFFFFF'/%3E%3Cpath d='M35 52 L35 63 C35 68 65 68 65 63 L65 52 L50 59 Z' fill='%23FFFFFF'/%3E%3Cpath d='M68 47 L68 60 L65 60 L65 48.5 Z' fill='%23FFFFFF'/%3E%3C/svg%3E">
 
-  <!-- Tailwind CSS & Font chuẩn Be Vietnam Pro -->
+  <!-- Tailwind CSS & Font Be Vietnam Pro -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- PUTER.JS AI API: Chạy AI trực tiếp trên trình duyệt miễn phí 100% không cần key -->
+  <script src="https://js.puter.com/v2/puter.js"></script>
+
   <style>
     body {
       font-family: 'Be Vietnam Pro', sans-serif;
@@ -134,7 +137,7 @@
             </div>
             <div>
               <p class="font-bold text-slate-800 text-[15px] leading-snug">3. Cài Đặt AI API</p>
-              <p class="text-[11px] text-violet-600 font-semibold">Gemini / Cloud AI</p>
+              <p class="text-[11px] text-violet-600 font-semibold">Tích hợp AI Trực Tuyến</p>
             </div>
           </div>
           <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
@@ -711,21 +714,17 @@
         </svg>
       </div>
 
-      <h3 class="text-xl font-black text-slate-900 mb-1">Cấu Hình AI API Key</h3>
+      <h3 class="text-xl font-black text-slate-900 mb-1">Cấu Hình AI API</h3>
       <p class="text-xs text-slate-500 mb-4 leading-relaxed">
-        Nhập Google Gemini API Key của bạn (miễn phí tại <b>aistudio.google.com</b>) để AI trực tiếp soạn 40 câu hỏi mới mỗi lần bấm thi!
+        Web đã tích hợp sẵn <b>Puter Cloud AI</b> hoàn toàn miễn phí không cần key. Bạn cũng có thể dán Google Gemini API Key riêng (tại <b>aistudio.google.com</b>) nếu muốn:
       </p>
 
-      <label class="text-[11px] font-bold text-slate-600 block mb-1">Google Gemini API Key:</label>
-      <input id="userApiKeyInput" type="password" placeholder="Dán mã AIzaSy... vào đây" class="w-full p-3 rounded-[16px] bg-slate-50 border border-slate-200 text-xs font-mono mb-2 focus:outline-none focus:border-violet-500">
-      
-      <p class="text-[10px] text-slate-400 mb-5 leading-normal">
-        * Nếu chưa có key, hệ thống sẽ tự động dùng kênh <b>AI Web Online</b> và ngân hàng đề thi thông minh để bạn làm bài liên tục mà không bao giờ bị lỗi.
-      </p>
+      <label class="text-[11px] font-bold text-slate-600 block mb-1">Tùy chọn: Google Gemini API Key:</label>
+      <input id="userApiKeyInput" type="password" placeholder="Dán mã AIzaSy... nếu có" class="w-full p-3 rounded-[16px] bg-slate-50 border border-slate-200 text-xs font-mono mb-2 focus:outline-none focus:border-violet-500">
 
-      <div class="flex gap-2">
-        <button onclick="saveUserApiKey()" class="flex-1 py-3 rounded-[18px] bg-[#6941F2] text-white font-bold text-xs active:scale-95 shadow-md shadow-indigo-100">Lưu Cấu Hình</button>
-        <button onclick="clearUserApiKey()" class="px-4 py-3 rounded-[18px] bg-slate-100 text-slate-600 font-bold text-xs active:scale-95">Xóa Key</button>
+      <div class="flex gap-2 mt-4">
+        <button onclick="saveUserApiKey()" class="flex-1 py-3 rounded-[18px] bg-[#6941F2] text-white font-bold text-xs active:scale-95 shadow-md shadow-indigo-100">Lưu Thay Đổi</button>
+        <button onclick="clearUserApiKey()" class="px-4 py-3 rounded-[18px] bg-slate-100 text-slate-600 font-bold text-xs active:scale-95">Dùng Mặc Định</button>
       </div>
     </div>
   </div>
@@ -772,7 +771,6 @@
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
     import { getDatabase, ref, set, get, update, onValue, off, remove } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 
-    // LIÊN KẾT DATABASE REALTIME URL CHÍNH XÁC
     const firebaseConfig = {
       apiKey: "AIzaSyCLa2RyRPlia2UMBMayhSxJ57w6Qd17zTE",
       authDomain: "eduzone-project-c5d5e.firebaseapp.com",
@@ -852,12 +850,11 @@
     };
   </script>
 
-  <!-- ================= CORE LOGIC & TỐI ƯU HÓA GEMINI AI ================= -->
+  <!-- ================= CORE LOGIC & TỐI ƯU HÓA GEMINI AI + PUTER AI ================= -->
   <script>
-    // Lấy API Key từ localStorage nếu người dùng đã lưu
     function getActiveGeminiKey() {
       const savedKey = localStorage.getItem("eduzone_user_gemini_key");
-      if (savedKey && savedKey.trim().length > 15) {
+      if (savedKey && savedKey.trim().startsWith("AIzaSy")) {
         return savedKey.trim();
       }
       return "";
@@ -872,7 +869,6 @@
     let quizTimerInterval = null;
     let timeSpentSeconds = 0;
 
-    // Biến quản lý PvP Realtime
     let currentPvPRoomId = null;
     let isPvPHost = false;
     let pvpQuestionList = [];
@@ -1009,7 +1005,6 @@
       }
     }
 
-    // ================= MODAL API KEY =================
     function toggleApiKeyModal(show) {
       const m = document.getElementById('apiKeyModal');
       if (show) {
@@ -1032,7 +1027,7 @@
         showToast("Đã lưu Gemini API Key thành công!", "emerald");
       } else {
         localStorage.removeItem("eduzone_user_gemini_key");
-        showToast("Đã đặt về chế độ AI mặc định", "slate");
+        showToast("Đã bật chế độ AI Puter Cloud mặc định", "slate");
       }
       toggleApiKeyModal(false);
     }
@@ -1040,11 +1035,10 @@
     function clearUserApiKey() {
       localStorage.removeItem("eduzone_user_gemini_key");
       document.getElementById('userApiKeyInput').value = "";
-      showToast("Đã xóa API Key cá nhân", "slate");
+      showToast("Đã xóa key, dùng AI Cloud miễn phí", "slate");
       toggleApiKeyModal(false);
     }
 
-    // ================= NAVIGATION =================
     function navigateSection(secId) {
       const sections = ['welcome', 'study', 'quiz', 'result', 'arena', 'feedback', 'account'];
       sections.forEach(id => {
@@ -1104,7 +1098,6 @@
       }
     }
 
-    // ================= STUDY STEPS =================
     function showStudyStep(stepNum) {
       [1, 2, 3, 4].forEach(n => {
         const stepEl = document.getElementById(`studyStep${n}`);
@@ -1158,28 +1151,13 @@
       return arr;
     }
 
-    // ================= BỘ PHÁT SINH ĐỀ THI AI LINH HOẠT VÀ TOÀN DIỆN =================
-    async function fetchQuestionsFromGemini(subject, grade, book) {
-      showToast(`Đang sinh đề thi 30 câu trắc nghiệm & 10 câu đúng sai môn ${subject}...`, "indigo");
-      
-      const userKey = getActiveGeminiKey();
-      
-      // Nếu có key người dùng, gọi trực tiếp Gemini 1.5 Flash
-      if (userKey) {
+    // ================= KẾT NỐI AI TRỰC TUYẾN (PUTER AI / GEMINI) =================
+    async function requestOnlineAI(prompt) {
+      // 1. Nếu có key Gemini cá nhân
+      const geminiKey = getActiveGeminiKey();
+      if (geminiKey) {
         try {
-          const prompt = `Bạn là chuyên gia khảo thí của Bộ GD&ĐT Việt Nam. Hãy soạn 1 đề ôn tập trắc nghiệm ĐÚNG CHUYÊN MÔN của môn "${subject}", Lớp ${grade}, bộ sách "${book}".
-CẤU TRÚC BẮT BUỘC TRẢ VỀ JSON:
-{
-  "mcq": [
-    {"question": "Câu 1: ...", "options": ["A", "B", "C", "D"], "correct": 0}
-  ],
-  "tf": [
-    {"prompt": "Câu 31 (Ngữ cảnh Đúng/Sai): ...", "statements": [{"text": "a) ...", "answer": true}, {"text": "b) ...", "answer": false}, {"text": "c) ...", "answer": true}, {"text": "d) ...", "answer": false}]}
-  ]
-}
-Yêu cầu: Sinh đủ 15 câu trắc nghiệm và 5 câu đúng sai tiêu biểu.`;
-
-          const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(userKey)}`;
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(geminiKey)}`;
           const res = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -1188,190 +1166,580 @@ Yêu cầu: Sinh đủ 15 câu trắc nghiệm và 5 câu đúng sai tiêu biể
               generationConfig: { responseMimeType: "application/json", temperature: 0.7 }
             })
           });
-
           if (res.ok) {
             const data = await res.json();
-            const jsonText = data.candidates[0].content.parts[0].text;
-            const exam = JSON.parse(jsonText);
-            if (exam.mcq && exam.mcq.length > 0) {
-              showToast("Sinh đề thành công từ Gemini AI!", "emerald");
-              return normalizeQuizLength(exam, subject, grade);
-            }
+            return JSON.parse(data.candidates[0].content.parts[0].text);
           }
         } catch (e) {
-          console.warn("Lỗi gọi Gemini cá nhân, chuyển sang bộ sinh đề chuyên sâu:", e);
+          console.warn("Gemini cá nhân gặp lỗi, chuyển sang Puter Cloud AI:", e);
         }
       }
 
-      // Tự động sinh đề chuẩn 100% đúng môn, không bao giờ trùng lặp
-      await new Promise(r => setTimeout(r, 600));
-      showToast(`Đã nạp đề thi ${subject} Lớp ${grade} chuẩn cấu trúc!`, "emerald");
-      return generateDynamicQuestionBank(subject, grade);
+      // 2. Tự động dùng Puter.js AI trên trình duyệt (Miễn phí 100%, không cần key)
+      if (window.puter && window.puter.ai) {
+        try {
+          const aiResponse = await window.puter.ai.chat(prompt + "\nLƯU Ý QUAN TRỌNG: Chỉ trả về JSON thuần túy, bắt đầu bằng { hoặc [ và kết thúc bằng } hoặc ], tuyệt đối không kèm lời giải thích hay markdown ```.", {
+            model: "gpt-4o-mini"
+          });
+          const raw = aiResponse?.message?.content || aiResponse?.text || String(aiResponse);
+          const cleaned = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+          const match = cleaned.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
+          if (match) {
+            return JSON.parse(match[0]);
+          }
+        } catch (err) {
+          console.warn("Puter Cloud AI bận hoặc timeout:", err);
+        }
+      }
+
+      return null;
     }
 
-    function normalizeQuizLength(exam, subject, grade) {
-      const fallback = generateDynamicQuestionBank(subject, grade);
-      const mcq = Array.isArray(exam.mcq) ? [...exam.mcq] : [];
-      const tf = Array.isArray(exam.tf) ? [...exam.tf] : [];
+    // ================= TẠO ĐỀ THI ÔN TẬP CHUẨN 40 CÂU KHÔNG TRÙNG LẶP =================
+    async function fetchQuestionsFromGemini(subject, grade, book) {
+      showToast(`Đang kết nối AI trực tuyến tạo đề thi môn ${subject}...`, "indigo");
 
-      while (mcq.length < 30) {
-        mcq.push(fallback.mcq[mcq.length]);
+      const prompt = `Soạn 1 đề thi trắc nghiệm học kỳ môn "${subject}", Lớp ${grade}, bộ sách "${book}".
+Cấu trúc JSON bắt buộc:
+{
+  "mcq": [
+    {"question": "Nội dung câu hỏi trắc nghiệm ngắn gọn?", "options": ["A", "B", "C", "D"], "correct": 0}
+  ],
+  "tf": [
+    {"prompt": "Ngữ cảnh câu hỏi Đúng/Sai:", "statements": [{"text": "Mệnh đề a", "answer": true}, {"text": "Mệnh đề b", "answer": false}, {"text": "Mệnh đề c", "answer": true}, {"text": "Mệnh đề d", "answer": false}]}
+  ]
+}
+Yêu cầu: Sinh 10 câu trắc nghiệm và 3 câu đúng sai tiêu biểu.`;
+
+      let exam = null;
+      try {
+        exam = await requestOnlineAI(prompt);
+      } catch (e) {
+        console.warn("Lỗi gọi AI:", e);
       }
-      while (tf.length < 10) {
-        tf.push(fallback.tf[tf.length]);
+
+      const completeExam = generateCompleteUniqueQuestionBank(subject, grade);
+
+      if (exam && Array.isArray(exam.mcq) && exam.mcq.length > 0) {
+        showToast("Đã tải đề thi thành công từ Trí Tuệ Nhân Tạo AI Online!", "emerald");
+        // Kết hợp câu hỏi AI vào vị trí đầu, phần còn lại lấy từ ngân hàng động độc lập đảm bảo đủ 30 MCQ + 10 TF
+        const finalMCQ = [...exam.mcq];
+        let idx = 0;
+        while (finalMCQ.length < 30) {
+          finalMCQ.push(completeExam.mcq[idx % completeExam.mcq.length]);
+          idx++;
+        }
+        const finalTF = Array.isArray(exam.tf) ? [...exam.tf] : [];
+        let tfIdx = 0;
+        while (finalTF.length < 10) {
+          finalTF.push(completeExam.tf[tfIdx % completeExam.tf.length]);
+          tfIdx++;
+        }
+        return { mcq: finalMCQ.slice(0, 30), tf: finalTF.slice(0, 10) };
       }
-      return {
-        mcq: mcq.slice(0, 30),
-        tf: tf.slice(0, 10)
-      };
+
+      showToast(`Đã tạo 40 câu hỏi độc lập môn ${subject} Lớp ${grade} (0% Trùng lặp)!`, "emerald");
+      return completeExam;
     }
 
-    // ================= KHO TẠO ĐỀ NĂNG ĐỘNG CHUẨN XÁC 100% (KHÔNG TRÙNG LẶP) =================
-    function generateDynamicQuestionBank(subject, grade) {
-      const bankMCQ = {
+    // ================= NGÂN HÀNG ĐỘNG 40 CÂU HOÀN TOÀN ĐỘC LẬP & KHÁC BIỆT =================
+    function generateCompleteUniqueQuestionBank(subject, grade) {
+      function r(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+      const allSubjectsMCQ = {
         "Toán Học": [
-          () => ({ q: `Tìm x biết: 2x + ${rand(4, 16)} = ${rand(20, 50)}`, o: [`x = 12`, `x = 8`, `x = 15`, `x = 10`], c: 0 }),
-          () => ({ q: `Kết quả của phép tính (-${rand(10, 30)}) + (-${rand(15, 45)}) bằng:`, o: [`-${rand(50, 75)}`, `${rand(50, 75)}`, `0`, `-10`], c: 0 }),
-          () => ({ q: "Tập hợp các ước tự nhiên của số 24 là:", o: ["{1; 2; 3; 4; 6; 8; 12; 24}", "{1; 2; 3; 4; 6; 12}", "{2; 4; 6; 8; 12}", "{1; 24}"], c: 0 }),
-          () => ({ q: "Hình nào sau đây có 4 cạnh bằng nhau và 4 góc vuông?", o: ["Hình vuông", "Hình chữ nhật", "Hình thoi", "Hình bình hành"], c: 0 }),
-          () => ({ q: "Số nguyên tố nhỏ nhất là số nào?", o: ["Số 2", "Số 1", "Số 0", "Số 3"], c: 0 }),
-          () => ({ q: "Đơn vị đo diện tích tiêu chuẩn trong hệ SI là:", o: ["Mét vuông (m²)", "Héc-ta (ha)", "Kilômét (km)", "Lít (l)"], c: 0 }),
-          () => ({ q: "Phân số nào sau đây tối giản?", o: ["5/7", "6/8", "9/12", "15/25"], c: 0 }),
+          () => ({ q: `Tìm x biết: ${r(2, 5)}x + ${r(6, 18)} = ${r(24, 60)}`, o: [`x = ${r(3, 9)}`, `x = ${r(10, 15)}`, `x = ${r(16, 20)}`, `x = 2`], c: 0 }),
+          () => ({ q: `Kết quả của phép tính (-${r(10, 25)}) + (-${r(15, 35)}) bằng:`, o: [`-${r(40, 60)}`, `${r(40, 60)}`, `0`, `-15`], c: 0 }),
+          () => ({ q: `Tập hợp các ước tự nhiên của số ${r(12, 28) * 2} có tất cả bao nhiêu ước?`, o: ["6 ước", "4 ước", "8 ước", "5 ước"], c: 0 }),
+          () => ({ q: "Hình nào sau đây có hai đường chéo bằng nhau và vuông góc với nhau tại trung điểm?", o: ["Hình vuông", "Hình chữ nhật", "Hình thoi", "Hình bình hành"], c: 0 }),
+          () => ({ q: "Số nguyên tố chẵn duy nhất trong toán học là số nào?", o: ["Số 2", "Số 0", "Số 4", "Số 6"], c: 0 }),
           () => ({ q: "Tổng số đo ba góc trong một tam giác luôn bằng:", o: ["180°", "360°", "90°", "270°"], c: 0 }),
-          () => ({ q: "Ước chung lớn nhất của 18 và 30 là:", o: ["6", "3", "2", "9"], c: 0 }),
-          () => ({ q: "Bội chung nhỏ nhất của 4 và 6 là:", o: ["12", "24", "6", "18"], c: 0 })
+          () => ({ q: `Lũy thừa nào sau đây có giá trị bằng ${r(2, 4) ** 3}?`, o: [`${r(2, 4)}³`, `${r(2, 4)}²`, `2⁴`, `3³`], c: 0 }),
+          () => ({ q: "Số đối của phân số -7/12 là phân số nào?", o: ["7/12", "-12/7", "12/7", "-7/12"], c: 0 }),
+          () => ({ q: `Một tam giác cân có góc ở đỉnh bằng ${r(4, 8) * 10}°, số đo mỗi góc ở đáy là:`, o: [`${(180 - r(4, 8) * 10) / 2}°`, "60°", "45°", "50°"], c: 0 }),
+          () => ({ q: "Ước chung lớn nhất của 24 và 36 là:", o: ["12", "6", "4", "8"], c: 0 }),
+          () => ({ q: "Bội chung nhỏ nhất của 6 và 8 là:", o: ["24", "48", "12", "18"], c: 0 }),
+          () => ({ q: "Tam giác có độ dài ba cạnh lần lượt là 3cm, 4cm, 5cm là tam giác gì?", o: ["Tam giác vuông", "Tam giác cân", "Tam giác đều", "Tam giác nhọn"], c: 0 }),
+          () => ({ q: "Số thập phân 0,75 được biểu diễn dưới dạng phân số tối giản là:", o: ["3/4", "75/100", "7/5", "1/2"], c: 0 }),
+          () => ({ q: "Giá trị tuyệt đối của số -15,8 là:", o: ["15,8", "-15,8", "0", "15"], c: 0 }),
+          () => ({ q: "Hai góc kề bù là hai góc có tổng số đo bằng:", o: ["180°", "90°", "360°", "120°"], c: 0 }),
+          () => ({ q: "Công thức tính diện tích hình chữ nhật có hai kích thước a và b là:", o: ["S = a . b", "S = (a + b) . 2", "S = a²", "S = a . b / 2"], c: 0 }),
+          () => ({ q: "Trong mặt phẳng tọa độ Oxy, điểm A(2; -3) nằm ở góc phần tư thứ mấy?", o: ["Góc phần tư thứ IV", "Góc phần tư thứ I", "Góc phần tư thứ II", "Góc phần tư thứ III"], c: 0 }),
+          () => ({ q: "Đa thức P(x) = 3x² - 5x + 7 có bậc là:", o: ["Bậc 2", "Bậc 3", "Bậc 1", "Bậc 7"], c: 0 }),
+          () => ({ q: "Nghiệm của phương trình bậc nhất 2x - 8 = 0 là:", o: ["x = 4", "x = -4", "x = 2", "x = 8"], c: 0 }),
+          () => ({ q: "Căn bậc hai số học của 81 bằng bao nhiêu?", o: ["9", "-9", "±9", "18"], c: 0 }),
+          () => ({ q: "Đường trung trực của một đoạn thẳng là đường thẳng:", o: ["Vuông góc với đoạn thẳng tại trung điểm", "Đi qua trung điểm nhưng không vuông góc", "Song song với đoạn thẳng", "Cắt đoạn thẳng tại một điểm bất kỳ"], c: 0 }),
+          () => ({ q: "Hình bình hành có hai đường chéo bằng nhau là hình gì?", o: ["Hình chữ nhật", "Hình thoi", "Hình vuông", "Hình thang"], c: 0 }),
+          () => ({ q: "Phép tính nào sau đây cho kết quả là số hữu tỉ dương?", o: ["(-3) . (-5)", "(-4) . 6", "(-10) / 2", "8 - 12"], c: 0 }),
+          () => ({ q: "Số nào sau đây chia hết cho cả 2, 3 và 5?", o: ["60", "45", "50", "32"], c: 0 }),
+          () => ({ q: "Tỉ số phần trăm của 15 và 60 là:", o: ["25%", "20%", "30%", "15%"], c: 0 }),
+          () => ({ q: "Khi gieo một con xúc xắc 6 mặt cân đối, xác suất xuất hiện mặt chẵn là:", o: ["1/2 (50%)", "1/6", "1/3", "2/3"], c: 0 }),
+          () => ({ q: "Thể tích của hình lập phương có cạnh 4cm là:", o: ["64 cm³", "16 cm³", "48 cm³", "32 cm³"], c: 0 }),
+          () => ({ q: "Hai góc đối đỉnh thì:", o: ["Bằng nhau", "Bù nhau", "Phụ nhau", "Có tổng bằng 90°"], c: 0 }),
+          () => ({ q: "Hình thoi có một góc vuông là hình gì?", o: ["Hình vuông", "Hình chữ nhật", "Hình bình hành", "Hình thang cân"], c: 0 }),
+          () => ({ q: "Chu vi hình tròn có đường kính d = 10cm xấp xỉ bằng:", o: ["31,4 cm", "62,8 cm", "15,7 cm", "78,5 cm"], c: 0 })
         ],
         "Ngữ Văn": [
-          () => ({ q: "Tác phẩm 'Hịch tướng sĩ' do danh tướng nào sáng tác?", o: ["Trần Hưng Đạo", "Nguyễn Trãi", "Quang Trung", "Lý Thường Kiệt"], c: 0 }),
-          () => ({ q: "Biện pháp tu từ trong câu: 'Mặt trời của bắp thì nằm trên đồi / Mặt trời của mẹ, em nằm trên lưng' là:", o: ["Ẩn dụ", "So sánh", "Hoán dụ", "Nhân hóa"], c: 0 }),
-          () => ({ q: "Từ nào sau đây là từ láy tượng thanh mô tả tiếng nước chảy?", o: ["Róc rách", "Lấp lánh", "Mênh mông", "Thăm thẳm"], c: 0 }),
-          () => ({ q: "Trong văn bản nghị luận, yếu tố giữ vai trò cốt lõi thuyết phục người đọc là:", o: ["Luận điểm và dẫn chứng lý lẽ", "Cốt truyện và nhân vật", "Vần điệu câu thơ", "Trí tưởng tượng hư cấu"], c: 0 }),
-          () => ({ q: "Thành ngữ 'Uống nước nhớ nguồn' thể hiện truyền thống đạo lý nào của dân tộc ta?", o: ["Lòng biết ơn tổ tiên và người đi trước", "Tính tiết kiệm trong cuộc sống", "Tinh thần đoàn kết khi có giặc", "Ý chí vượt khó vươn lên"], c: 0 }),
-          () => ({ q: "Dấu câu nào được dùng để đánh dấu lời đối thoại trực tiếp của nhân vật?", o: ["Dấu gạch ngang đầu dòng", "Dấu ngoặc kép", "Dấu chấm lửng", "Dấu chấm phẩy"], c: 0 }),
-          () => ({ q: "Thể thơ lục bát truyền thống gồm các cặp câu luân phiên bao nhiêu tiếng?", o: ["Một câu 6 tiếng và một câu 8 tiếng", "Mỗi câu đều 7 tiếng", "Mỗi câu 5 tiếng", "Một câu 4 tiếng và một câu 6 tiếng"], c: 0 }),
-          () => ({ q: "Nhân vật Dế Mèn trong tác phẩm của nhà văn Tô Hoài đã rút ra bài học đường đời đầu tiên sau cái chết của ai?", o: ["Dế Choắt", "Chị Cốc", "Dế Trũi", "Bọ Ngựa"], c: 0 }),
-          () => ({ q: "Từ trái nghĩa với từ 'Dũng cảm' là:", o: ["Hèn nhát", "Hiền lành", "Chăm chỉ", "Trung thực"], c: 0 }),
-          () => ({ q: "Phương thức biểu đạt chính của thể loại truyện cổ tích là:", o: ["Tự sự", "Miêu tả", "Biểu cảm", "Thuyết minh"], c: 0 })
+          () => ({ q: "Tác phẩm 'Hịch tướng sĩ' do danh tướng nào của nhà Trần sáng tác?", o: ["Trần Hưng Đạo", "Nguyễn Trãi", "Quang Trung", "Lý Thường Kiệt"], c: 0 }),
+          () => ({ q: "Biện pháp tu từ trong câu: 'Người Cha mái tóc bạc / Đốt lửa cho anh nằm' là:", o: ["Ẩn dụ", "So sánh", "Hoán dụ", "Nhân hóa"], c: 0 }),
+          () => ({ q: "Từ nào sau đây là từ láy tượng thanh mô tả âm thanh?", o: ["Róc rách", "Lấp lánh", "Mênh mông", "Thăm thẳm"], c: 0 }),
+          () => ({ q: "Yếu tố giữ vai trò cốt lõi trong văn bản nghị luận là:", o: ["Luận điểm và lý lẽ dẫn chứng", "Cốt truyện và nhân vật", "Vần điệu câu thơ", "Trí tưởng tượng hư cấu"], c: 0 }),
+          () => ({ q: "Thành ngữ 'Uống nước nhớ nguồn' khuyên răn con người điều gì?", o: ["Lòng biết ơn cội nguồn tổ tiên", "Tính tiết kiệm trong sinh hoạt", "Tinh thần đoàn kết cộng đồng", "Ý chí vượt qua thử thách"], c: 0 }),
+          () => ({ q: "Thể thơ lục bát truyền thống gồm các cặp câu luân phiên bao nhiêu tiếng?", o: ["Một câu 6 tiếng và một câu 8 tiếng", "Mỗi câu 7 tiếng", "Mỗi câu 5 tiếng", "Một câu 4 tiếng và một câu 6 tiếng"], c: 0 }),
+          () => ({ q: "Dế Mèn trong tác phẩm của Tô Hoài đã rút ra bài học đường đời đầu tiên sau sự việc nào?", o: ["Cái chết thương tâm của Dế Choắt", "Trận đòn của Chị Cốc", "Chuyến đi xa cùng Dế Trũi", "Lạc vào vương quốc loài kiến"], c: 0 }),
+          () => ({ q: "Phương thức biểu đạt chính của thể loại văn bản thuyết minh là:", o: ["Thuyết minh", "Tự sự", "Biểu cảm", "Nghị luận"], c: 0 }),
+          () => ({ q: "Từ trái nghĩa với từ 'Dũng cảm' là:", o: ["Hèn nhát", "Hiền lành", "Chăm chỉ", "Thật thà"], c: 0 }),
+          () => ({ q: "Tác giả của bài thơ 'Lượm' ca ngợi chú bé liên lạc dũng cảm là:", o: ["Tố Hữu", "Huy Cận", "Xuân Diệu", "Trần Đăng Khoa"], c: 0 }),
+          () => ({ q: "Nhân vật người nông dân nghèo phải bán chó và tự tử bằng bả chó trong truyện ngắn của Nam Cao là:", o: ["Lão Hạc", "Chí Phèo", "Anh Dậu", "Giáo Thứ"], c: 0 }),
+          () => ({ q: "Thành phần biệt lập trong câu: 'Chao ôi, bông hoa đẹp quá!' là:", o: ["Thành phần cảm thán", "Thành phần gọi đáp", "Thành phần phụ chú", "Thành phần tình thái"], c: 0 }),
+          () => ({ q: "Phép liên kết sử dụng từ ngữ đồng nghĩa hoặc đại từ thay thế cho từ ở câu trước gọi là:", o: ["Phép thế", "Phép lặp", "Phép nối", "Phép đồng nghĩa"], c: 0 }),
+          () => ({ q: "Văn bản 'Bình Ngô đại cáo' được mệnh danh là bản tuyên ngôn độc lập thứ mấy của dân tộc ta?", o: ["Bản thứ hai", "Bản thứ nhất", "Bản thứ ba", "Bản thứ tư"], c: 0 }),
+          () => ({ q: "Từ ngữ nào sau đây là từ mượn gốc Hán?", o: ["Giang sơn", "Bàn ghế", "Áo quần", "Sông núi"], c: 0 }),
+          () => ({ q: "Khởi ngữ trong câu: 'Về môn Toán, nó là học sinh giỏi nhất lớp' là:", o: ["Về môn Toán", "Nó", "Học sinh giỏi", "Nhất lớp"], c: 0 }),
+          () => ({ q: "Dấu hai chấm trong câu văn thường dùng để:", o: ["Báo hiệu phần giải thích hoặc lời dẫn trực tiếp", "Kết thúc câu trần thuật", "Bộc lộ cảm xúc người viết", "Nối các vế câu ghép"], c: 0 }),
+          () => ({ q: "Nghĩa hàm ý của câu là:", o: ["Phần thông báo ngầm ẩn không diễn đạt trực tiếp", "Nghĩa đen hiển hiện trên mặt chữ", "Nghĩa gốc của từ ngữ", "Nghĩa chuyển của từ"], c: 0 }),
+          () => ({ q: "Tác phẩm 'Chuyện người con gái Nam Xương' của Nguyễn Dữ ca ngợi phẩm chất của người phụ nữ nào?", o: ["Vũ Nương", "Kiều Nguyệt Nga", "Thúy Kiều", "Thúy Vân"], c: 0 }),
+          () => ({ q: "Hình ảnh trung tâm xuyên suốt bài thơ 'Bếp lửa' của Bằng Việt gắn liền với ai?", o: ["Người bà kính yêu", "Người mẹ tần tảo", "Người cha chiến sĩ", "Người thầy giáo"], c: 0 }),
+          () => ({ q: "Trong câu ghép: 'Vì trời mưa to nên đường trơn', quan hệ giữa hai vế câu là:", o: ["Nguyên nhân - Kết quả", "Điều kiện - Kết quả", "Tương phản đối lập", "Tăng tiến"], c: 0 }),
+          () => ({ q: "Phương châm hội thoại yêu cầu nói đúng sự thật, không nói điều mình không tin là đúng là:", o: ["Phương châm về chất", "Phương châm về lượng", "Phương châm quan hệ", "Phương châm lịch sự"], c: 0 }),
+          () => ({ q: "Biện pháp tu từ 'Điệp ngữ' có tác dụng chính là:", o: ["Nhấn mạnh ý và tạo nhịp điệu cảm xúc", "Làm câu văn ngắn gọn lại", "Tạo sự hài hước dí dỏm", "Tránh lặp lại từ ngữ"], c: 0 }),
+          () => ({ q: "Bài thơ 'Đoàn thuyền đánh cá' của Huy Cận khắc họa vẻ đẹp tráng lệ của vùng biển nào?", o: ["Vùng biển Quảng Ninh", "Vùng biển Nha Trang", "Vùng biển Cà Mau", "Vùng biển Vũng Tàu"], c: 0 }),
+          () => ({ q: "Câu rút gọn là câu:", o: ["Bị lược bỏ một hoặc một số thành phần câu", "Không thể xác định được chủ ngữ", "Chỉ gồm một từ ngữ duy nhất", "Có nhiều vị ngữ ghép lại"], c: 0 }),
+          () => ({ q: "Tục ngữ 'Ăn quả nhớ kẻ trồng cây' thuộc chủ đề gì?", o: ["Đạo đức và lòng biết ơn", "Lao động sản xuất", "Thiên nhiên thời tiết", "Học tập thi cử"], c: 0 }),
+          () => ({ q: "Nhân vật Thúy Kiều trong 'Truyện Kiều' của Nguyễn Du mang họ gì?", o: ["Họ Vương", "Họ Kim", "Họ Từ", "Họ Thúc"], c: 0 }),
+          () => ({ q: "Phương thức biểu đạt của bài thơ 'Quê hương' của Tế Hanh là:", o: ["Biểu cảm kết hợp miêu tả", "Nghị luận thuần túy", "Thuyết minh khoa học", "Hành chính công vụ"], c: 0 }),
+          () => ({ q: "Từ láy 'lom khom' thuộc nhóm từ láy nào?", o: ["Từ láy tượng hình", "Từ láy tượng thanh", "Từ láy toàn bộ", "Từ đồng âm"], c: 0 }),
+          () => ({ q: "Câu văn 'Cậu đi đâu đấy?' thuộc kiểu câu phân loại theo mục đích nói nào?", o: ["Câu nghi vấn", "Câu cầu khiến", "Câu cảm thán", "Câu trần thuật"], c: 0 })
         ],
         "Tiếng Anh": [
-          () => ({ q: "My sister usually ______ up at 6:00 AM every morning.", o: ["wakes", "wake", "waking", "woke"], c: 0 }),
-          () => ({ q: "They ______ football in the school yard at the moment.", o: ["are playing", "play", "played", "plays"], c: 0 }),
-          () => ({ q: "Which word has the underlined part pronounced differently?", o: ["washed", "played", "listened", "cleaned"], c: 0 }),
-          () => ({ q: "Ha Long Bay is one of the most famous natural ______ in Vietnam.", o: ["wonders", "islands", "rivers", "mountains"], c: 0 }),
-          () => ({ q: "If you practice English speaking every day, you ______ progress quickly.", o: ["will make", "made", "makes", "making"], c: 0 }),
-          () => ({ q: "What is the opposite meaning of the adjective 'quiet'?", o: ["noisy", "peaceful", "calm", "silent"], c: 0 }),
-          () => ({ q: "Look! The sun ______ in the East.", o: ["is rising", "rises", "rose", "risen"], c: 0 }),
-          () => ({ q: "She has lived in Da Nang ______ five years.", o: ["for", "since", "in", "at"], c: 0 }),
-          () => ({ q: "You ______ wear a helmet when riding a motorbike in Vietnam.", o: ["must", "may", "can", "should not"], c: 0 }),
-          () => ({ q: "Choose the correct past participle of the verb 'give':", o: ["given", "gave", "giving", "gives"], c: 0 })
+          () => ({ q: "My father usually ______ coffee every morning before going to work.", o: ["drinks", "drink", "drinking", "drank"], c: 0 }),
+          () => ({ q: "Look! The students ______ badminton in the playground right now.", o: ["are playing", "play", "played", "plays"], c: 0 }),
+          () => ({ q: "She ______ to Paris with her family last summer vacation.", o: ["travelled", "travels", "travel", "travelling"], c: 0 }),
+          () => ({ q: "Which word has the underlined part pronounced differently?", o: ["washed", "played", "listened", "opened"], c: 0 }),
+          () => ({ q: "If it rains tomorrow, we ______ the picnic until next Sunday.", o: ["will postpone", "postpone", "postponed", "postponing"], c: 0 }),
+          () => ({ q: "Ha Long Bay is one of the most famous natural ______ in Vietnam.", o: ["wonders", "forests", "islands", "rivers"], c: 0 }),
+          () => ({ q: "What is the opposite meaning of the adjective 'noisy'?", o: ["quiet", "crowded", "peaceful", "loud"], c: 0 }),
+          () => ({ q: "Mount Everest is ______ mountain in the world.", o: ["the highest", "higher", "high", "highest"], c: 0 }),
+          () => ({ q: "I have known my best friend ______ five years.", o: ["for", "since", "in", "during"], c: 0 }),
+          () => ({ q: "You ______ wear a seatbelt when driving a car.", o: ["must", "can", "may", "should not"], c: 0 }),
+          () => ({ q: "Choose the correct past participle of the verb 'give':", o: ["given", "gave", "giving", "gives"], c: 0 }),
+          () => ({ q: "She asked me where I ______ from.", o: ["came", "come", "coming", "comes"], c: 0 }),
+          () => ({ q: "This cake was ______ by my mother yesterday.", o: ["baked", "bake", "baking", "bakes"], c: 0 }),
+          () => ({ q: "He is interested ______ learning foreign languages.", o: ["in", "on", "at", "about"], c: 0 }),
+          () => ({ q: "The weather today is much ______ than it was yesterday.", o: ["better", "good", "best", "more good"], c: 0 }),
+          () => ({ q: "They decided to go out ______ it was raining heavily.", o: ["although", "because", "despite", "so"], c: 0 }),
+          () => ({ q: "What is the synonym of the verb 'start'?", o: ["begin", "finish", "stop", "end"], c: 0 }),
+          () => ({ q: "My brother enjoys ______ comic books in his free time.", o: ["reading", "to read", "read", "reads"], c: 0 }),
+          () => ({ q: "How ______ bottles of water do you drink every day?", o: ["many", "much", "often", "long"], c: 0 }),
+          () => ({ q: "The woman ______ helped me yesterday is a doctor.", o: ["who", "which", "whom", "whose"], c: 0 }),
+          () => ({ q: "If I ______ a bird, I would fly everywhere.", o: ["were", "am", "was", "will be"], c: 0 }),
+          () => ({ q: "She speaks English very ______.", o: ["fluently", "fluent", "fluency", "more fluent"], c: 0 }),
+          () => ({ q: "Don't forget to ______ off the lights before leaving the room.", o: ["turn", "take", "look", "get"], c: 0 }),
+          () => ({ q: "That is the ______ film I have ever seen.", o: ["most interesting", "more interesting", "interesting", "as interesting"], c: 0 }),
+          () => ({ q: "We arrived at the airport ______ 8:30 AM.", o: ["at", "on", "in", "by"], c: 0 }),
+          () => ({ q: "Choose the word whose primary stress is on the first syllable:", o: ["pencil", "arrive", "agree", "relax"], c: 0 }),
+          () => ({ q: "My sister isn't old enough ______ a motorbike.", o: ["to ride", "riding", "ride", "rode"], c: 0 }),
+          () => ({ q: "Neither John nor his friends ______ going to the concert tonight.", o: ["are", "is", "was", "be"], c: 0 }),
+          () => ({ q: "I wish I ______ more time to travel around Vietnam.", o: ["had", "have", "will have", "having"], c: 0 }),
+          () => ({ q: "The opposite word of 'expensive' is:", o: ["cheap", "valuable", "costly", "rich"], c: 0 })
         ],
         "Lịch Sử - Địa Lý": [
-          () => ({ q: "Chiến thắng trên sông Bạch Đằng năm 938 gắn liền với vị anh hùng dân tộc nào?", o: ["Ngô Quyền", "Đinh Bộ Lĩnh", "Trần Hưng Đạo", "Lý Thường Kiệt"], c: 0 }),
-          () => ({ q: "Đỉnh núi Phan-xi-păng thuộc dãy Hoàng Liên Sơn có độ cao chính xác là:", o: ["3.143 m", "3.000 m", "2.850 m", "3.200 m"], c: 0 }),
-          () => ({ q: "Vị vua sáng lập nên triều đại nhà Lý và dời đô về Thăng Long năm 1010 là:", o: ["Lý Công Uẩn (Lý Thái Tổ)", "Lý Thường Kiệt", "Lý Thánh Tông", "Lý Nhân Tông"], c: 0 }),
-          () => ({ q: "Hai con sông lớn nhất có ý nghĩa đặc biệt quan trọng với nông nghiệp nước ta là:", o: ["Sông Hồng và sông Mê Kông", "Sông Đồng Nai và sông Mã", "Sông Hương và sông Thu Bồn", "Sông Cả và sông Đà"], c: 0 }),
-          () => ({ q: "Khí hậu đặc trưng của miền Bắc Việt Nam là:", o: ["Nhiệt đới ẩm gió mùa có mùa đông lạnh", "Xích đạo quanh năm nắng nóng", "Ôn đới lục địa khô hạn", "Cận nhiệt đới gió mùa khô"], c: 0 }),
-          () => ({ q: "Trận chiến Điện Biên Phủ trên không diễn ra hào hùng vào năm nào?", o: ["Năm 1972", "Năm 1954", "Năm 1968", "Năm 1975"], c: 0 }),
-          () => ({ q: "Vùng biển Việt Nam có diện tích khoảng bao nhiêu triệu km² trong Biển Đông?", o: ["Khoảng 1 triệu km²", "Khoảng 0.5 triệu km²", "Khoảng 2 triệu km²", "Khoảng 3 triệu km²"], c: 0 }),
-          () => ({ q: "Kinh đô của nhà nước Văn Lang thời các vua Hùng đặt tại vùng đất nào ngày nay?", o: ["Phong Châu (Phú Thọ)", "Cổ Loa (Hà Nội)", "Hoa Lư (Ninh Bình)", "Mê Linh (Hà Nội)"], c: 0 }),
-          () => ({ q: "Tỉnh thành nào là trung tâm kinh tế lớn nhất ở khu vực phía Nam nước ta?", o: ["TP. Hồ Chí Minh", "Cần Thơ", "Bình Dương", "Đồng Nai"], c: 0 }),
-          () => ({ q: "Đồng bằng sông Cửu Long có thế mạnh kinh tế hàng đầu cả nước về lĩnh vực nào?", o: ["Sản xuất lương thực, thủy sản và cây ăn trái", "Khai thác khoáng sản kim loại", "Phát triển công nghiệp nặng", "Trồng rừng lấy gỗ lớn"], c: 0 })
+          () => ({ q: "Chiến thắng trên sông Bạch Đằng năm 938 gắn liền với tên tuổi của vị anh hùng nào?", o: ["Ngô Quyền", "Đinh Bộ Lĩnh", "Trần Hưng Đạo", "Lý Thường Kiệt"], c: 0 }),
+          () => ({ q: "Đỉnh núi Phan-xi-păng được mệnh danh nóc nhà Đông Dương có độ cao chính xác là:", o: ["3.143 m", "3.000 m", "2.850 m", "3.200 m"], c: 0 }),
+          () => ({ q: "Vị vua sáng lập triều Lý và ban Chiếu dời đô về Thăng Long năm 1010 là:", o: ["Lý Thái Tổ (Lý Công Uẩn)", "Lý Thường Kiệt", "Lý Thánh Tông", "Lý Nhân Tông"], c: 0 }),
+          () => ({ q: "Hai con sông lớn nhất có diện tích lưu vực và vai trò quan trọng hàng đầu ở nước ta là:", o: ["Sông Hồng và sông Mê Kông", "Sông Đồng Nai và sông Mã", "Sông Hương và sông Thu Bồn", "Sông Cả và sông Đà"], c: 0 }),
+          () => ({ q: "Khí hậu miền Bắc Việt Nam có đặc điểm đặc trưng là:", o: ["Nhiệt đới ẩm gió mùa có mùa đông lạnh", "Nhiệt đới xích đạo quanh năm", "Cận nhiệt đới khô hạn", "Ôn đới lục địa"], c: 0 }),
+          () => ({ q: "Chiến thắng Điện Biên Phủ 'lừng lẫy năm châu, chấn động địa cầu' diễn ra vào năm nào?", o: ["Năm 1954", "Năm 1945", "Năm 1975", "Năm 1972"], c: 0 }),
+          () => ({ q: "Vùng biển Việt Nam thuộc Biển Đông có diện tích ước tính khoảng bao nhiêu?", o: ["Khoảng 1 triệu km²", "Khoảng 500 nghìn km²", "Khoảng 2 triệu km²", "Khoảng 3 triệu km²"], c: 0 }),
+          () => ({ q: "Kinh đô đầu tiên của nhà nước Văn Lang thời các vua Hùng đặt tại:", o: ["Phong Châu (Phú Thọ)", "Cổ Loa (Đông Anh)", "Hoa Lư (Ninh Bình)", "Thăng Long (Hà Nội)"], c: 0 }),
+          () => ({ q: "Đồng bằng sông Cửu Long là vùng sản xuất nông nghiệp lớn nhất nước ta về mặt hàng nào?", o: ["Lúa gạo, cây ăn quả và thủy hải sản", "Khai thác than đá và quặng sắt", "Cây công nghiệp lâu năm cà phê", "Rừng gỗ nguyên liệu"], c: 0 }),
+          () => ({ q: "Đại thắng mùa xuân giải phóng hoàn toàn miền Nam thống nhất đất nước diễn ra vào ngày:", o: ["30/4/1975", "2/9/1945", "19/5/1890", "1/5/1975"], c: 0 }),
+          () => ({ q: "Dãy núi nào đóng vai trò ranh giới tự nhiên phân chia khí hậu hai miền Bắc - Nam nước ta?", o: ["Dãy Bạch Mã", "Dãy Hoàng Liên Sơn", "Dãy Trường Sơn Bắc", "Dãy Hoành Sơn"], c: 0 }),
+          () => ({ q: "Ba lần chiến thắng quân xâm lược Mông - Nguyên diễn ra vẻ vang dưới triều đại nào?", o: ["Triều Trần", "Triều Lý", "Triều Lê", "Triều Nguyễn"], c: 0 }),
+          () => ({ q: "Hai quần đảo thiêng liêng Hoàng Sa và Trường Sa lần lượt thuộc quyền quản lý hành chính của:", o: ["TP. Đà Nẵng và tỉnh Khánh Hòa", "Tỉnh Quảng Ngãi và tỉnh Bình Thuận", "Tỉnh Quảng Nam và tỉnh Kiên Giang", "Tỉnh Bà Rịa - Vũng Tàu"], c: 0 }),
+          () => ({ q: "Việt Nam nằm trọn vẹn trong múi giờ chuẩn quốc tế số mấy?", o: ["Múi giờ số 7 (GMT+7)", "Múi giờ số 6", "Múi giờ số 8", "Múi giờ số 9"], c: 0 }),
+          () => ({ q: "Vịnh Hạ Long được UNESCO công nhận là di sản thiên nhiên thế giới thuộc tỉnh nào?", o: ["Quảng Ninh", "Hải Phòng", "Nam Định", "Thanh Hóa"], c: 0 }),
+          () => ({ q: "Vị anh hùng dân tộc lãnh đạo cuộc khởi nghĩa Lam Sơn đánh tan quân Minh xâm lược là:", o: ["Lê Lợi", "Nguyễn Trãi", "Quang Trung", "Trần Hưng Đạo"], c: 0 }),
+          () => ({ q: "Đất bazan màu mỡ thích hợp trồng cà phê, hồ tiêu phân bố chủ yếu ở vùng nào?", o: ["Tây Nguyên", "Đồng bằng sông Hồng", "Trung du Bắc Bộ", "Bắc Trung Bộ"], c: 0 }),
+          () => ({ q: "Văn Miếu - Quốc Tử Giám trường đại học đầu tiên của nước ta được thành lập dưới triều vua nào?", o: ["Lý Thánh Tông", "Lý Thái Tổ", "Trần Thái Tông", "Lê Thánh Tông"], c: 0 }),
+          () => ({ q: "Đường bờ biển của Việt Nam có chiều dài khoảng bao nhiêu km?", o: ["Khoảng 3.260 km", "Khoảng 2.500 km", "Khoảng 4.000 km", "Khoảng 1.800 km"], c: 0 }),
+          () => ({ q: "Chiến dịch Tây Nguyên năm 1975 mở đầu bằng trận đánh then chốt nào?", o: ["Buôn Ma Thuột", "Pleiku", "Kon Tum", "Đà Lạt"], c: 0 }),
+          () => ({ q: "Khoáng sản có trữ lượng lớn nhất và chất lượng cao nhất ở vùng Đông Bắc nước ta là:", o: ["Than đá", "Dầu mỏ", "Bô-xít", "A-pa-tít"], c: 0 }),
+          () => ({ q: "Cố đô Huế - Di sản văn hóa thế giới được xây dựng chủ yếu dưới triều đại nào?", o: ["Triều Nguyễn", "Triều Tây Sơn", "Triều Lê Trung Hưng", "Triều Mạc"], c: 0 }),
+          () => ({ q: "Gió mùa mùa hạ hoạt động ở nước ta chủ yếu thổi theo hướng nào?", o: ["Hướng Tây Nam", "Hướng Đông Bắc", "Hướng Đông Nam", "Hướng Tây Bắc"], c: 0 }),
+          () => ({ q: "Cuộc khởi nghĩa Hai Bà Trưng bùng nổ chống lại ách đô hộ của nhà Hán vào năm nào?", o: ["Năm 40 sau Công nguyên", "Năm 248", "Năm 542", "Năm 938"], c: 0 }),
+          () => ({ q: "Trung tâm công nghiệp, kinh tế và tài chính lớn nhất cả nước là thành phố nào?", o: ["TP. Hồ Chí Minh", "Hà Nội", "Hải Phòng", "Đà Nẵng"], c: 0 }),
+          () => ({ q: "Nhà nước Âu Lạc của An Dương Vương có kinh đô đặt tại tòa thành nổi tiếng nào?", o: ["Thành Cổ Loa", "Thành Hoa Lư", "Thành nhà Hồ", "Hoàng thành Thăng Long"], c: 0 }),
+          () => ({ q: "Sông nào dài nhất chảy hoàn toàn trên lãnh thổ Việt Nam?", o: ["Sông Đồng Nai", "Sông Hồng", "Sông Mê Kông", "Sông Cả"], c: 0 }),
+          () => ({ q: "Trận chiến Ngọc Hồi - Đống Đa đại phá 29 vạn quân Thanh diễn ra vào mùa xuân năm:", o: ["1789", "1788", "1792", "1785"], c: 0 }),
+          () => ({ q: "Cao nguyên đá Đồng Văn - Công viên địa chất toàn cầu thuộc tỉnh nào?", o: ["Hà Giang", "Cao Bằng", "Lạng Sơn", "Lào Cai"], c: 0 }),
+          () => ({ q: "Phong trào Cần Vương cuối thế kỷ XIX bùng nổ sau khi ai ban chiếu Cần Vương?", o: ["Vua Hàm Nghi", "Vua Duy Tân", "Vua Tự Đức", "Phan Đình Phùng"], c: 0 })
         ],
         "Tin Học": [
-          () => ({ q: "Khối xử lý trung tâm điều khiển và thực hiện mọi tính toán trong máy tính là:", o: ["CPU", "RAM", "Ổ cứng SSD", "Bộ nguồn PSU"], c: 0 }),
-          () => ({ q: "Thiết bị nào sau đây thuộc nhóm thiết bị nhập dữ liệu (Input Device)?", o: ["Bàn phím và chuột", "Màn hình hiển thị", "Máy in laser", "Tai nghe và loa"], c: 0 }),
-          () => ({ q: "Tổ hợp phím tắt tiêu chuẩn để hoàn tác (Undo) thao tác vừa làm là:", o: ["Ctrl + Z", "Ctrl + C", "Ctrl + V", "Ctrl + Y"], c: 0 }),
+          () => ({ q: "Khối xử lý trung tâm điều khiển và thực hiện mọi tính toán trong máy tính là:", o: ["CPU", "RAM", "Ổ cứng SSD", "Nguồn PSU"], c: 0 }),
+          () => ({ q: "Thiết bị nào sau đây thuộc nhóm thiết bị nhập dữ liệu (Input Device)?", o: ["Bàn phím và chuột", "Màn hình hiển thị", "Máy in laser", "Loa và tai nghe"], c: 0 }),
+          () => ({ q: "Tổ hợp phím tắt chuẩn để hoàn tác (Undo) thao tác vừa thực hiện là:", o: ["Ctrl + Z", "Ctrl + C", "Ctrl + V", "Ctrl + Y"], c: 0 }),
           () => ({ q: "1 Gigabyte (GB) tương đương với bao nhiêu Megabyte (MB)?", o: ["1024 MB", "1000 MB", "512 MB", "2048 MB"], c: 0 }),
-          () => ({ q: "Định dạng file tài liệu chuẩn của Microsoft Word các phiên bản mới là:", o: [".docx", ".xlsx", ".pptx", ".mp4"], c: 0 }),
-          () => ({ q: "Mạng máy tính kết nối các máy tính trong phạm vi toàn cầu được gọi là:", o: ["Mạng Internet", "Mạng LAN", "Mạng WAN", "Mạng Bluetooth"], c: 0 }),
-          () => ({ q: "Hành động nào sau đây giúp bảo vệ an toàn tài khoản trực tuyến của bạn?", o: ["Đặt mật khẩu mạnh gồm chữ hoa, số và ký tự đặc biệt", "Chia sẻ mật khẩu cho bạn bè cùng lớp", "Bấm vào các liên kết nhận quà lạ qua Facebook", "Dùng ngày sinh làm mật khẩu cho mọi trang"], c: 0 }),
-          () => ({ q: "Trong bảng tính Excel, công thức tính tổng các ô từ A1 đến A5 là:", o: ["=SUM(A1:A5)", "=TOTAL(A1:A5)", "=ADD(A1:A5)", "=COUNT(A1:A5)"], c: 0 }),
-          () => ({ q: "Ngôn ngữ lập trình phổ biến hàng đầu cho học sinh bắt đầu học code là:", o: ["Python / Scratch", "Assembly", "Fortran", "COBOL"], c: 0 }),
-          () => ({ q: "Phần mềm độc hại tự nhân bản và phá hoại dữ liệu máy tính được gọi chung là:", o: ["Virus / Malware", "Hệ điều hành", "Trình duyệt web", "Driver phần cứng"], c: 0 })
+          () => ({ q: "Định dạng tệp văn bản mặc định của Microsoft Word là:", o: [".docx", ".xlsx", ".pptx", ".mp4"], c: 0 }),
+          () => ({ q: "Hệ thống mạng máy tính kết nối phạm vi toàn cầu được gọi là:", o: ["Mạng Internet", "Mạng LAN", "Mạng WAN", "Mạng Bluetooth"], c: 0 }),
+          () => ({ q: "Hành động nào giúp bảo vệ an toàn tài khoản trực tuyến của bạn tốt nhất?", o: ["Đặt mật khẩu mạnh gồm chữ hoa, chữ thường, số và ký tự đặc biệt", "Dùng ngày sinh làm mật khẩu cho mọi trang", "Chia sẻ mật khẩu cho bạn thân", "Đăng nhập trên máy tính công cộng mà không đăng xuất"], c: 0 }),
+          () => ({ q: "Trong bảng tính Excel, công thức tính tổng các giá trị từ ô A1 đến A10 là:", o: ["=SUM(A1:A10)", "=TOTAL(A1:A10)", "=ADD(A1:A10)", "=COUNT(A1:A10)"], c: 0 }),
+          () => ({ q: "Phần mềm độc hại tự động lây nhiễm và phá hủy dữ liệu trong máy tính gọi chung là:", o: ["Virus máy tính / Malware", "Hệ điều hành", "Trình duyệt web", "Phần mềm diệt virus"], c: 0 }),
+          () => ({ q: "Phím tắt F5 trên bàn phím máy tính dùng để:", o: ["Làm mới trang (Refresh)", "Tắt máy tính", "Lưu tập tin", "In ấn tài liệu"], c: 0 }),
+          () => ({ q: "Bộ nhớ truy cập ngẫu nhiên tạm thời của máy tính có tên viết tắt là:", o: ["RAM", "ROM", "SSD", "HDD"], c: 0 }),
+          () => ({ q: "Đơn vị đo lường thông tin cơ bản nhỏ nhất trong máy tính là:", o: ["Bit (0 hoặc 1)", "Byte", "Kilobyte", "Hertz"], c: 0 }),
+          () => ({ q: "1 Byte tương đương với bao nhiêu bit?", o: ["8 bit", "4 bit", "16 bit", "32 bit"], c: 0 }),
+          () => ({ q: "Thiết bị nào sau đây vừa là thiết bị nhập vừa là thiết bị xuất?", o: ["Màn hình cảm ứng", "Bàn phím cơ", "Máy quét Scanner", "Chuột quang"], c: 0 }),
+          () => ({ q: "Tổ hợp phím tắt dùng để sao chép văn bản được chọn là:", o: ["Ctrl + C", "Ctrl + X", "Ctrl + V", "Ctrl + A"], c: 0 }),
+          () => ({ q: "Dịch vụ lưu trữ dữ liệu đám mây của Google có tên là:", o: ["Google Drive", "OneDrive", "Dropbox", "iCloud"], c: 0 }),
+          () => ({ q: "Trình duyệt web nào do tập đoàn Google phát triển?", o: ["Google Chrome", "Mozilla Firefox", "Safari", "Microsoft Edge"], c: 0 }),
+          () => ({ q: "Hệ điều hành phổ biến nhất trên các dòng máy tính cá nhân hiện nay là:", o: ["Microsoft Windows", "Linux Ubuntu", "DOS", "Unix"], c: 0 }),
+          () => ({ q: "Trong ngôn ngữ Scratch hoặc Python, câu lệnh 'if... else' dùng để biểu diễn cấu trúc nào?", o: ["Cấu trúc rẽ nhánh điều kiện", "Cấu trúc lặp vô hạn", "Cấu trúc tuần tự", "Cấu trúc khai báo biến"], c: 0 }),
+          () => ({ q: "Phần mở rộng mặc định của bảng tính Microsoft Excel là:", o: [".xlsx", ".docx", ".pdf", ".txt"], c: 0 }),
+          () => ({ q: "Địa chỉ IP (Internet Protocol) có chức năng chính là:", o: ["Định danh duy nhất một thiết bị khi tham gia vào mạng", "Bảo vệ máy tính khỏi virus", "Tăng tốc độ xử lý của CPU", "Lưu trữ dữ liệu vĩnh viễn"], c: 0 }),
+          () => ({ q: "Dãy hữu hạn các chỉ dẫn rõ ràng nhằm giải quyết một bài toán cụ thể được gọi là:", o: ["Thuật toán", "Chương trình", "Hệ điều hành", "Biến số"], c: 0 }),
+          () => ({ q: "Trong sơ đồ khối thuật toán, hình thoi thường được quy ước để biểu diễn:", o: ["Thao tác kiểm tra điều kiện rẽ nhánh", "Thao tác nhập xuất dữ liệu", "Bắt đầu hoặc kết thúc", "Thao tác tính toán xử lý"], c: 0 }),
+          () => ({ q: "Loại ổ đĩa nào có tốc độ khởi động và đọc ghi dữ liệu nhanh vượt trội hiện nay?", o: ["Ổ cứng thể rắn SSD", "Ổ cứng cơ HDD", "Đĩa mềm Floppy", "Đĩa quang CD-ROM"], c: 0 }),
+          () => ({ q: "Hành vi nào sau đây vi phạm luật an toàn thông tin mạng?", o: ["Phát tán tin giả, bôi nhọ danh dự người khác trên mạng", "Tìm kiếm tài liệu học tập trực tuyến", "Gửi email trao đổi bài học", "Cài đặt phần mềm diệt virus bản quyền"], c: 0 }),
+          () => ({ q: "Phím tắt dùng để chọn toàn bộ văn bản hoặc tập tin trong thư mục là:", o: ["Ctrl + A", "Ctrl + S", "Ctrl + B", "Ctrl + P"], c: 0 }),
+          () => ({ q: "Trong Excel, hàm =AVERAGE(B1:B5) có ý nghĩa gì?", o: ["Tính trung bình cộng các ô từ B1 đến B5", "Tìm giá trị lớn nhất", "Đếm số ô có dữ liệu", "Tính tổng các ô"], c: 0 }),
+          () => ({ q: "Dây cáp mạng truyền dữ liệu bằng tín hiệu xung ánh sáng có tốc độ cực nhanh là:", o: ["Cáp quang (Fiber optic)", "Cáp đồng xoắn đôi", "Cáp đồng trục", "Sóng hồng ngoại"], c: 0 }),
+          () => ({ q: "Đuôi tệp tin hình ảnh động phổ biến trên Internet là:", o: [".gif", ".mp3", ".avi", ".exe"], c: 0 }),
+          () => ({ q: "Tổ hợp phím Alt + F4 dùng để:", o: ["Đóng cửa sổ ứng dụng đang mở", "Mở trình quản lý file", "Khởi động lại máy tính", "Chụp ảnh màn hình"], c: 0 })
         ]
       };
 
-      const tfTemplates = {
+      const allSubjectsTF = {
         "Toán Học": [
-          (i) => ({
-            prompt: `Câu ${30 + i} (Đúng/Sai - Đại số & Hình học Lớp ${grade}): Cho số hữu tỉ và các hình hình học cơ bản:`,
-            statements: [
-              { text: "a) Mọi số tự nhiên đều là số nguyên và cũng là số hữu tỉ.", answer: true },
-              { text: "b) Phép nhân hai số nguyên âm luôn cho kết quả là một số nguyên âm.", answer: false },
-              { text: "c) Trong tam giác vuông, bình phương cạnh huyền bằng tổng bình phương hai cạnh góc vuông.", answer: true },
-              { text: "d) Góc bẹt có số đo bằng 90 độ.", answer: false }
-            ]
-          })
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Tập hợp số & Lũy thừa): Xét tính đúng sai của các nhận định số học:`, statements: [
+            { text: "a) Mọi số tự nhiên đều là số nguyên và cũng là số hữu tỉ.", answer: true },
+            { text: "b) Tích của hai số nguyên âm luôn là một số nguyên âm.", answer: false },
+            { text: "c) Với a khác 0 thì a mũ 0 luôn bằng 1.", answer: true },
+            { text: "d) Số 0 vừa là số nguyên dương vừa là số nguyên âm.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Phân số & Số thập phân): Xét tính toán với số hữu tỉ:`, statements: [
+            { text: "a) Số thập phân vô hạn tuần hoàn là một số hữu tỉ.", answer: true },
+            { text: "b) Phân số có mẫu bằng 0 luôn xác định trong tập số thực.", answer: false },
+            { text: "c) Muốn cộng hai phân số khác mẫu, ta quy đồng mẫu số rồi cộng các tử.", answer: true },
+            { text: "d) Giá trị tuyệt đối của một số thực có thể nhận giá trị âm.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Tam giác và góc): Xét các tính chất hình học cơ bản:`, statements: [
+            { text: "a) Tổng ba góc trong bất kỳ tam giác nào cũng bằng 180°.", answer: true },
+            { text: "b) Trong tam giác đều, mỗi góc có số đo bằng 90°.", answer: false },
+            { text: "c) Hai tam giác bằng nhau thì có chu vi và diện tích bằng nhau.", answer: true },
+            { text: "d) Tam giác tù có thể có hai góc tù cùng một lúc.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Định lý Pythagore & Tam giác vuông): Xét các định lý trong tam giác vuông:`, statements: [
+            { text: "a) Trong tam giác vuông, bình phương cạnh huyền bằng tổng bình phương hai cạnh góc vuông.", answer: true },
+            { text: "b) Cạnh huyền luôn là cạnh ngắn nhất trong tam giác vuông.", answer: false },
+            { text: "c) Tam giác có ba cạnh 6cm, 8cm, 10cm là tam giác vuông.", answer: true },
+            { text: "d) Góc đối diện với cạnh huyền là góc nhọn.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Tứ giác đặc biệt): Xét đặc điểm các hình phẳng:`, statements: [
+            { text: "a) Hình vuông vừa là hình chữ nhật vừa là hình thoi.", answer: true },
+            { text: "b) Hình thoi luôn có hai đường chéo bằng nhau.", answer: false },
+            { text: "c) Hình chữ nhật có hai đường chéo bằng nhau và cắt nhau tại trung điểm.", answer: true },
+            { text: "d) Hình bình hành có bốn góc đều là góc vuông.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Biểu thức đại số & Đa thức): Xét tính chất của đa thức:`, statements: [
+            { text: "a) Bậc của đa thức là bậc của hạng tử có bậc cao nhất trong dạng thu gọn.", answer: true },
+            { text: "b) Số 0 được coi là đơn thức có bậc bằng 1.", answer: false },
+            { text: "c) Giá trị của x làm cho đa thức P(x) = 0 được gọi là nghiệm của P(x).", answer: true },
+            { text: "d) Đa thức bậc 2 luôn có ít nhất 3 nghiệm phân biệt.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Tỉ lệ thức & Dãy tỉ số bằng nhau): Cho tỉ lệ thức a/b = c/d:`, statements: [
+            { text: "a) Tích ngoại tỉ luôn bằng tích trung tỉ (a . d = b . c).", answer: true },
+            { text: "b) Nếu a/b = c/d thì a + b = c + d luôn luôn đúng.", answer: false },
+            { text: "c) Dãy tỉ số bằng nhau cho phép cộng các tử và cộng các mẫu tương ứng.", answer: true },
+            { text: "d) Hai đại lượng tỉ lệ nghịch có tỉ số giữa hai giá trị bất kỳ luôn là hằng số.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Đường thẳng & Góc): Xét vị trí tương đối của hai đường thẳng:`, statements: [
+            { text: "a) Hai góc đối đỉnh thì bằng nhau.", answer: true },
+            { text: "b) Hai góc bằng nhau thì chắc chắn đối đỉnh với nhau.", answer: false },
+            { text: "c) Qua một điểm ở ngoài một đường thẳng, chỉ có duy nhất một đường thẳng song song với nó.", answer: true },
+            { text: "d) Hai đường thẳng cùng vuông góc với đường thẳng thứ ba thì cắt nhau.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Thống kê & Biểu đồ): Xét xử lý dữ liệu học tập:`, statements: [
+            { text: "a) Biểu đồ quạt tròn dùng để thể hiện tỉ lệ phần trăm của từng phần trong tổng thể.", answer: true },
+            { text: "b) Tần số của một giá trị là giá trị lớn nhất trong dãy số liệu.", answer: false },
+            { text: "c) Số trung bình cộng giúp đại diện cho mức độ trung bình của dấu hiệu.", answer: true },
+            { text: "d) Biểu đồ cột không thể biểu diễn số liệu so sánh giữa hai đối tượng.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Xác suất biến cố): Xét khả năng xảy ra của biến cố:`, statements: [
+            { text: "a) Xác suất của một biến cố chắc chắn luôn bằng 1 (100%).", answer: true },
+            { text: "b) Xác suất của một biến cố ngẫu nhiên có thể lớn hơn 1.", answer: false },
+            { text: "c) Gieo một đồng xu cân đối, xác suất xuất hiện mặt ngửa bằng 0,5.", answer: true },
+            { text: "d) Biến cố không thể xảy ra có xác suất bằng 0,5.", answer: false }
+          ]})
         ],
         "Ngữ Văn": [
-          (i) => ({
-            prompt: `Câu ${30 + i} (Đúng/Sai - Văn học & Tiếng Việt Lớp ${grade}): Xét các nhận định ngữ văn sau:`,
-            statements: [
-              { text: "a) Thơ lục bát là thể thơ dân gian truyền thống đặc trưng của người Việt.", answer: true },
-              { text: "b) Trong câu ghép, các vế câu chỉ có thể nối với nhau bằng dấu chấm câu duy nhất.", answer: false },
-              { text: "c) Từ đồng nghĩa là những từ có nghĩa giống nhau hoặc gần giống nhau.", answer: true },
-              { text: "d) Văn bản thuyết minh mang tính chất hư cấu và dựa hoàn toàn vào cảm xúc tác giả.", answer: false }
-            ]
-          })
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Thể thơ truyền thống): Xét đặc trưng các thể thơ Việt Nam:`, statements: [
+            { text: "a) Thơ lục bát gồm các cặp câu luân phiên 6 chữ và 8 chữ, gieo vần bằng.", answer: true },
+            { text: "b) Thể thơ bốn chữ và năm chữ bắt buộc phải gieo vần trắc ở mọi câu.", answer: false },
+            { text: "c) Thơ song thất lục bát có nguồn gốc từ sự sáng tạo độc đáo của dân tộc ta.", answer: true },
+            { text: "d) Thơ tự do không tuân theo bất kỳ nhịp điệu hay cảm xúc nội tại nào.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Biện pháp tu từ): Xét nghệ thuật ngôn từ trong văn bản:`, statements: [
+            { text: "a) Ẩn dụ là gọi tên sự vật hiện tượng này bằng tên sự vật hiện tượng khác có nét tương đồng.", answer: true },
+            { text: "b) Hoán dụ bắt buộc phải có từ so sánh như 'như', 'tựa như', 'là'.", answer: false },
+            { text: "c) Điệp từ ngữ giúp nhấn mạnh ý nghĩa và tạo sự hài hòa nhạc điệu.", answer: true },
+            { text: "d) Biện pháp nói giảm nói tránh dùng để phóng đại mức độ sự việc lên quá mức.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Văn bản nghị luận): Xét cấu trúc bài văn nghị luận:`, statements: [
+            { text: "a) Luận điểm là tư tưởng quan điểm chính mà người viết muốn chứng minh.", answer: true },
+            { text: "b) Dẫn chứng trong văn nghị luận có thể bịa đặt tùy ý không cần xác thực.", answer: false },
+            { text: "c) Phép lập luận phân tích giúp chia nhỏ vấn đề để xem xét tường tận.", answer: true },
+            { text: "d) Văn bản nghị luận chỉ dựa vào cảm xúc chủ quan, không cần lý lẽ logic.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Văn bản thuyết minh): Xét đặc điểm bài văn thuyết minh:`, statements: [
+            { text: "a) Văn bản thuyết minh cung cấp tri thức chính xác, khách quan về sự vật hiện tượng.", answer: true },
+            { text: "b) Yếu tố tưởng tượng hư cấu là yêu cầu bắt buộc trong bài thuyết minh.", answer: false },
+            { text: "c) Có thể sử dụng các biện pháp nghệ thuật để bài thuyết minh thêm sinh động.", answer: true },
+            { text: "d) Số liệu trong bài văn thuyết minh không cần kiểm chứng nguồn gốc.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Cú pháp tiếng Việt): Xét cấu tạo các kiểu câu:`, statements: [
+            { text: "a) Câu đơn là câu chỉ có một cụm chủ ngữ - vị ngữ nòng cốt.", answer: true },
+            { text: "b) Câu ghép bắt buộc các vế phải nối với nhau bằng dấu chấm phẩy.", answer: false },
+            { text: "c) Thành phần khởi ngữ thường đứng trước chủ ngữ để nêu đề tài của câu.", answer: true },
+            { text: "d) Thành phần gọi đáp tham gia trực tiếp vào việc diễn đạt nghĩa sự việc của câu.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Truyện dân gian Việt Nam): Xét các thể loại văn học dân gian:`, statements: [
+            { text: "a) Truyện truyền thuyết thường có yếu tố hoang đường kỳ ảo gắn với nhân vật lịch sử.", answer: true },
+            { text: "b) Truyện cổ tích phản ánh hiện thực hoàn toàn chính xác theo biên niên sử.", answer: false },
+            { text: "c) Truyện ngụ ngôn mượn chuyện loài vật để răn dạy bài học đạo lý con người.", answer: true },
+            { text: "d) Ca dao dân ca do một tác giả chuyên nghiệp duy nhất thời phong kiến sáng tác.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Giao tiếp hội thoại): Xét các phương châm giao tiếp:`, statements: [
+            { text: "a) Phương châm lịch sự yêu cầu tôn trọng người đối thoại trong giao tiếp.", answer: true },
+            { text: "b) Nói vòng vo lạc đề là tuân thủ nghiêm ngặt phương châm quan hệ.", answer: false },
+            { text: "c) Phương châm về lượng yêu cầu nói không thừa và không thiếu thông tin cần thiết.", answer: true },
+            { text: "d) Phương châm về chất cho phép đưa thông tin sai lệch để mua vui.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Từ vựng tiếng Việt): Xét cấu tạo và nguồn gốc từ:`, statements: [
+            { text: "a) Từ phức gồm có từ ghép và từ láy.", answer: true },
+            { text: "b) Tất cả các từ có hai tiếng giống nhau đều là từ láy toàn bộ.", answer: false },
+            { text: "c) Từ Hán Việt góp phần làm cho ngôn ngữ thêm trang trọng và cô đọng.", answer: true },
+            { text: "d) Thuật ngữ khoa học có tính đa nghĩa và thay đổi nghĩa theo cảm xúc người đọc.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Văn học hiện thực phê phán): Xét tác phẩm giai đoạn 1930 - 1945:`, statements: [
+            { text: "a) Nhà văn Nam Cao phản ánh số phận đau thương của người nông dân và trí thức nghèo.", answer: true },
+            { text: "b) Nhân vật Lão Hạc bán chó vì lòng tham lam tiền bạc của bản thân.", answer: false },
+            { text: "c) Tác phẩm 'Tắt đèn' của Ngô Tất Tố tố cáo tội ác sưu thuế vô nhân đạo của thực dân.", answer: true },
+            { text: "d) Chị Dậu trong 'Tắt đèn' là người phụ nữ cam chịu yếu đuối không dám phản kháng.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Thơ hiện đại Việt Nam): Xét hình tượng người lính kháng chiến:`, statements: [
+            { text: "a) Bài thơ 'Đồng chí' của Chính Hữu ngợi ca tình đồng chí gắn bó keo sơn keo sơn.", answer: true },
+            { text: "b) Người lính trong bài thơ 'Bài thơ về tiểu đội xe không kính' mang nỗi buồn bi lụy tuyệt vọng.", answer: false },
+            { text: "c) Hình ảnh 'Đầu súng trăng treo' mang vẻ đẹp vừa hiện thực vừa lãng mạn.", answer: true },
+            { text: "d) Thơ ca thời kỳ chống Mỹ hoàn toàn vắng bóng tinh thần lạc quan yêu đời.", answer: false }
+          ]})
         ],
         "Tiếng Anh": [
-          (i) => ({
-            prompt: `Câu ${30 + i} (True/False - Grammar & Usage Grade ${grade}): Consider the following English grammar rules:`,
-            statements: [
-              { text: "a) The Present Simple tense is used to describe daily routines and general truths.", answer: true },
-              { text: "b) We use 'since' for a period of time, such as 'since three years'.", answer: false },
-              { text: "c) Adverbs of manner usually end with '-ly', such as 'carefully' and 'quickly'.", answer: true },
-              { text: "d) The irregular past tense of verb 'buy' is 'buyed'.", answer: false }
-            ]
-          })
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Present and Past Tenses): Regarding English verb forms:`, statements: [
+            { text: "a) The Present Simple tense is used to express general truths and habits.", answer: true },
+            { text: "b) We use the Past Continuous for an action completed at a specific time in the past.", answer: false },
+            { text: "c) The past form of regular verbs is usually created by adding '-ed'.", answer: true },
+            { text: "d) The auxiliary verb used in Present Simple questions with 'he' is 'do'.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Passive Voice): Consider rules of passive transformation:`, statements: [
+            { text: "a) Passive voice is formed with verb 'to be' and the past participle (V3/ed).", answer: true },
+            { text: "b) Sentences without an object (intransitive verbs) can always be turned into passive.", answer: false },
+            { text: "c) 'By + agent' can be omitted if the agent is unknown or obvious.", answer: true },
+            { text: "d) The passive form of 'She wrote a letter' is 'A letter is written by her'.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Conditional Sentences): Regarding Type 1 and Type 2 conditionals:`, statements: [
+            { text: "a) First conditional expresses real possibilities in the present or future.", answer: true },
+            { text: "b) In Type 2 conditional, the 'if' clause uses the Present Simple tense.", answer: false },
+            { text: "c) 'Unless' has the same meaning as 'if not'.", answer: true },
+            { text: "d) 'If I was rich, I will buy a car' is grammatically correct in standard English.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Comparison of Adjectives): Examining comparative forms:`, statements: [
+            { text: "a) Short adjectives add '-er' in comparative form, such as 'taller' and 'faster'.", answer: true },
+            { text: "b) The comparative of 'good' is 'gooder'.", answer: false },
+            { text: "c) Superlative form of long adjectives requires 'the most', like 'the most beautiful'.", answer: true },
+            { text: "d) 'As... as' is used to show difference between two people or things.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Prepositions of Time and Place): Regarding usage of at, on, in:`, statements: [
+            { text: "a) We use 'at' for precise times of the day, such as 'at 7:00 PM'.", answer: true },
+            { text: "b) We use 'in' for specific days of the week, like 'in Monday'.", answer: false },
+            { text: "c) We use 'in' for months, years, and seasons, like 'in summer'.", answer: true },
+            { text: "d) We say 'on the morning' instead of 'in the morning'.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Modal Verbs): Regarding functions of modal auxiliaries:`, statements: [
+            { text: "a) 'Must' expresses strong personal obligation or necessity.", answer: true },
+            { text: "b) Modal verbs take '-s' in the third person singular, like 'he cans'.", answer: false },
+            { text: "c) 'Should' is used to give recommendations or polite advice.", answer: true },
+            { text: "d) After modal verbs, we must use infinitive with 'to', like 'must to go'.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Countable and Uncountable Nouns): Checking quantifiers:`, statements: [
+            { text: "a) 'Many' is used with plural countable nouns, such as 'many books'.", answer: true },
+            { text: "b) 'Much' is used with plural countable nouns, like 'much students'.", answer: false },
+            { text: "c) Uncountable nouns do not normally have a plural form.", answer: true },
+            { text: "d) 'A few' means almost nothing and carries a negative meaning.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Reported Speech): Regarding direct to indirect transformation:`, statements: [
+            { text: "a) When reporting, present tenses usually shift back to past tenses.", answer: true },
+            { text: "b) Time expressions like 'tomorrow' stay exactly the same in reported speech.", answer: false },
+            { text: "c) Pronouns change depending on the speaker and the listener.", answer: true },
+            { text: "d) Question word order remains inverted in indirect questions, like 'where do you live'.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Relative Clauses): Regarding relative pronouns:`, statements: [
+            { text: "a) 'Who' is used as a relative pronoun referring to people.", answer: true },
+            { text: "b) 'Which' can only refer to people, never to animals or objects.", answer: false },
+            { text: "c) 'Whose' indicates possession for both people and things.", answer: true },
+            { text: "d) That can never replace who or which in defining relative clauses.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (True/False - Gerunds and Infinitives): Checking verb complements:`, statements: [
+            { text: "a) Verbs like 'enjoy', 'avoid', and 'mind' are followed by a gerund (V-ing).", answer: true },
+            { text: "b) After prepositions, we always use the bare infinitive (V-bare).", answer: false },
+            { text: "c) 'Decide' and 'promise' are followed by 'to-infinitive'.", answer: true },
+            { text: "d) 'Stop to do' and 'stop doing' have identical meanings in all situations.", answer: false }
+          ]})
         ],
         "Lịch Sử - Địa Lý": [
-          (i) => ({
-            prompt: `Câu ${30 + i} (Đúng/Sai - Tự nhiên & Lịch sử Việt Nam Lớp ${grade}): Xét tính chính xác của các mệnh đề:`,
-            statements: [
-              { text: "a) Việt Nam có đường bờ biển dài hơn 3.260 km kéo dài từ Bắc vào Nam.", answer: true },
-              { text: "b) Địa hình nước ta có 3/4 diện tích là đồng bằng trũng thấp phì nhiêu.", answer: false },
-              { text: "c) Kháng chiến chống quân Mông - Nguyên thắng lợi vẻ vang dưới sự lãnh đạo của nhà Trần.", answer: true },
-              { text: "d) Sông ngòi miền Trung nước ta có đặc điểm là dài, lòng sông rộng và dòng chảy êm đềm.", answer: false }
-            ]
-          })
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Địa hình và Lãnh thổ Việt Nam): Xét các đặc điểm địa lý tự nhiên:`, statements: [
+            { text: "a) Lãnh thổ nước ta có 3/4 diện tích là đồi núi, 1/4 là đồng bằng.", answer: true },
+            { text: "b) Đỉnh núi Phan-xi-păng nằm ở vùng núi Đông Bắc nước ta.", answer: false },
+            { text: "c) Đường bờ biển nước ta dài 3.260 km chạy cong hình chữ S.", answer: true },
+            { text: "d) Vùng biển Việt Nam có diện tích nhỏ hơn nhiều so với phần đất liền.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Khí hậu và Thủy văn): Xét đặc trưng thời tiết sông ngòi:`, statements: [
+            { text: "a) Nước ta có mạng lưới sông ngòi dày đặc với nhiều phù sa màu mỡ.", answer: true },
+            { text: "b) Mùa lũ ở sông ngòi miền Trung trùng với mùa lũ ở miền Bắc.", answer: false },
+            { text: "c) Miền Bắc có mùa đông lạnh do ảnh hưởng của gió mùa Đông Bắc.", answer: true },
+            { text: "d) Lượng mưa trung bình năm của nước ta chỉ đạt dưới 500 mm.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Thời kỳ dựng nước Văn Lang - Âu Lạc): Xét cội nguồn lịch sử dân tộc:`, statements: [
+            { text: "a) Nhà nước Văn Lang do các vua Hùng đứng đầu đóng đô tại Phong Châu.", answer: true },
+            { text: "b) Trống đồng Đông Sơn là hiện vật tiêu biểu của thời kỳ đồ đá cũ.", answer: false },
+            { text: "c) Thành Cổ Loa được xây dựng hình xoáy ốc kiên cố dưới thời An Dương Vương.", answer: true },
+            { text: "d) Nhà nước Văn Lang đã có quân đội thường trực và luật pháp thành văn.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Đấu tranh giành độc lập thời Bắc thuộc): Xét các cuộc khởi nghĩa tiêu biểu:`, statements: [
+            { text: "a) Khởi nghĩa Hai Bà Trưng năm 40 giành lại độc lập tự chủ cho đất nước.", answer: true },
+            { text: "b) Chiến thắng Bạch Đằng năm 938 diễn ra dưới sự chỉ huy của Lý Bí.", answer: false },
+            { text: "c) Chiến thắng năm 938 đã chấm dứt vĩnh viễn hơn 1000 năm Bắc thuộc.", answer: true },
+            { text: "d) Khởi nghĩa Bà Triệu bùng nổ chống lại ách đô hộ của nhà Tùy.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Triều đại nhà Lý và Thăng Long): Xét các mốc son thời Lý:`, statements: [
+            { text: "a) Năm 1010, vua Lý Thái Tổ ban Chiếu dời đô về thành Thăng Long.", answer: true },
+            { text: "b) Quốc Tử Giám được thành lập nhằm mục đích đào tạo binh lính đánh giặc.", answer: false },
+            { text: "c) Bài thơ thần 'Nam quốc sơn hà' vang lên bên bờ sông Như Nguyệt thời Lý.", answer: true },
+            { text: "d) Nhà Lý chưa từng mở mang bờ cõi hay đắp đê ngăn lũ.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Kháng chiến chống quân Mông - Nguyên thời Trần): Xét hào khí Đông A:`, statements: [
+            { text: "a) Quân dân nhà Trần ba lần đánh tan đội quân xâm lược Mông - Nguyên.", answer: true },
+            { text: "b) Hội nghị Diên Hồng là nơi vua Trần hỏi ý kiến của các tướng lĩnh trẻ tuổi.", answer: false },
+            { text: "c) Tác phẩm 'Hịch tướng sĩ' khích lệ sâu sắc tinh thần yêu nước của binh sĩ.", answer: true },
+            { text: "d) Chiến thuật 'vườn không nhà trống' không đem lại tác dụng gì trong kháng chiến.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Phong trào Tây Sơn và Quang Trung): Xét chiến công hiển hách của nghĩa quân:`, statements: [
+            { text: "a) Nguyễn Huệ lãnh đạo đánh tan 5 vạn quân Xiêm trong trận Rạch Gầm - Xoài Mút.", answer: true },
+            { text: "b) Quân Thanh sang xâm lược nước ta với mục đích giúp đỡ nhân dân ta ấm no.", answer: false },
+            { text: "c) Trận Ngọc Hồi - Đống Đa quét sạch 29 vạn quân Mãn Thanh mùa xuân 1789.", answer: true },
+            { text: "d) Vua Quang Trung chưa từng quan tâm đến việc phát triển chữ Nôm dân tộc.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Kháng chiến chống Pháp 1945 - 1954): Xét thắng lợi chiến dịch lịch sử:`, statements: [
+            { text: "a) Chiến dịch Điện Biên Phủ năm 1954 đập tan tập đoàn cứ điểm mạnh nhất Đông Dương.", answer: true },
+            { text: "b) Hiệp định Giơ-ne-vơ năm 1954 cho phép quân Pháp tiếp tục cai trị miền Bắc.", answer: false },
+            { text: "c) Chiến dịch Việt Bắc thu - đông 1947 bảo vệ an toàn cơ quan đầu não kháng chiến.", answer: true },
+            { text: "d) Đại tướng Võ Nguyên Giáp là tổng tư lệnh chiến dịch Điện Biên Phủ.", answer: true }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Kháng chiến chống Mỹ 1954 - 1975): Xét cuộc kháng chiến vĩ đại:`, statements: [
+            { text: "a) Phong trào Đồng Khởi năm 1960 bùng nổ mạnh mẽ tại tỉnh Bến Tre.", answer: true },
+            { text: "b) Chiến thắng Điện Biên Phủ trên không năm 1972 diễn ra ở vùng rừng núi Tây Nguyên.", answer: false },
+            { text: "c) Chiến dịch Hồ Chí Minh lịch sử mùa xuân 1975 giải phóng Sài Gòn toàn vẹn.", answer: true },
+            { text: "d) Ngày 30/4/1975 đánh dấu mốc non sông thu về một mối độc lập thống nhất.", answer: true }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Kinh tế các vùng miền nước ta): Xét thế mạnh các vùng kinh tế:`, statements: [
+            { text: "a) Đồng bằng sông Hồng có mật độ dân số cao nhất cả nước.", answer: true },
+            { text: "b) Tây Nguyên là vùng có điều kiện thuận lợi nhất để nuôi trồng thủy sản nước ngọt.", answer: false },
+            { text: "c) Vùng Đông Nam Bộ dẫn đầu cả nước về quy mô sản xuất công nghiệp và thu hút FDI.", answer: true },
+            { text: "d) Đồng bằng sông Cửu Long không chịu ảnh hưởng của hiện tượng xâm nhập mặn.", answer: false }
+          ]})
         ],
         "Tin Học": [
-          (i) => ({
-            prompt: `Câu ${30 + i} (Đúng/Sai - Mạng & An Toàn Số Lớp ${grade}): Xét các kiến thức sử dụng công nghệ thông tin:`,
-            statements: [
-              { text: "a) Mật khẩu an toàn cần kết hợp cả chữ hoa, chữ thường, chữ số và ký tự đặc biệt.", answer: true },
-              { text: "b) Sao chép bài viết của người khác trên mạng và nộp làm bài của mình là việc làm đúng luật.", answer: false },
-              { text: "c) Đám mây (Cloud Storage) cho phép lưu trữ và truy cập dữ liệu ở bất kỳ nơi nào có Internet.", answer: true },
-              { text: "d) Không cần thiết phải cập nhật hệ điều hành vì các bản cập nhật luôn làm máy chậm hơn.", answer: false }
-            ]
-          })
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Phần cứng máy tính): Xét vai trò của các linh kiện bên trong case:`, statements: [
+            { text: "a) CPU được coi là bộ não điều khiển và xử lý thông tin của máy tính.", answer: true },
+            { text: "b) Dữ liệu lưu trong RAM vẫn tồn tại đầy đủ sau khi máy tính bị mất điện đột ngột.", answer: false },
+            { text: "c) Ổ cứng SSD có tốc độ truy xuất dữ liệu nhanh hơn nhiều so với ổ cơ HDD.", answer: true },
+            { text: "d) Màn hình máy tính là thiết bị nhập dữ liệu tiêu chuẩn.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Phần mềm và Hệ điều hành): Xét các loại chương trình máy tính:`, statements: [
+            { text: "a) Hệ điều hành quản lý việc phân phối tài nguyên phần cứng và phần mềm.", answer: true },
+            { text: "b) Máy tính có thể hoạt động soạn thảo văn bản bình thường mà không cần hệ điều hành.", answer: false },
+            { text: "c) Microsoft Word, Google Chrome là các phần mềm ứng dụng.", answer: true },
+            { text: "d) Linux là hệ điều hành thương mại độc quyền phải trả phí rất đắt.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Mạng máy tính và Internet): Xét cấu trúc mạng kết nối:`, statements: [
+            { text: "a) Mạng Internet là mạng kết nối hàng triệu máy tính trên phạm vi toàn cầu.", answer: true },
+            { text: "b) Mạng LAN có phạm vi địa lý kết nối giữa các quốc gia và châu lục.", answer: false },
+            { text: "c) Bộ định tuyến Router giúp chuyển tiếp các gói dữ liệu giữa các mạng khác nhau.", answer: true },
+            { text: "d) Không thể kết nối Internet nếu không cắm dây mạng trực tiếp vào máy tính.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - An toàn thông tin số): Xét quy tắc bảo mật không gian mạng:`, statements: [
+            { text: "a) Mật khẩu mạnh nên chứa chữ hoa, chữ thường, số và ký tự đặc biệt.", answer: true },
+            { text: "b) Bấm vào các đường link lạ tặng quà trên mạng xã hội là hoàn toàn vô hại.", answer: false },
+            { text: "c) Sử dụng phần mềm diệt virus bản quyền giúp ngăn chặn mã độc tống tiền.", answer: true },
+            { text: "d) Chia sẻ mật khẩu tài khoản cá nhân cho bạn bè là việc làm an toàn.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Soạn thảo văn bản Word): Xét kỹ năng xử lý văn bản:`, statements: [
+            { text: "a) Tổ hợp phím Ctrl + S dùng để lưu lại văn bản đang soạn thảo.", answer: true },
+            { text: "b) Phím Enter dùng để nhảy sang trang mới ngay lập tức.", answer: false },
+            { text: "c) Có thể chèn bảng biểu, hình ảnh và sơ đồ vào tài liệu Word.", answer: true },
+            { text: "d) Định dạng đuôi file chuẩn của văn bản Word là .mp3.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Bảng tính điện tử Excel): Xét tính toán tự động trong bảng tính:`, statements: [
+            { text: "a) Mọi công thức tính toán trong Excel đều bắt buộc phải bắt đầu bằng dấu bằng (=).", answer: true },
+            { text: "b) Hàm =SUM() dùng để tính trung bình cộng của các ô số liệu.", answer: false },
+            { text: "c) Địa chỉ ô A1 là giao điểm của cột A và hàng số 1.", answer: true },
+            { text: "d) Excel không thể vẽ các biểu đồ hình cột hay quạt tròn.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Thuật toán và Lập trình): Xét tư duy giải quyết vấn đề bằng code:`, statements: [
+            { text: "a) Thuật toán là một dãy hữu hạn các chỉ dẫn rõ ràng để giải bài toán.", answer: true },
+            { text: "b) Một bài toán chỉ có thể giải bằng một thuật toán duy nhất.", answer: false },
+            { text: "c) Vòng lặp cho phép thực hiện một đoạn lệnh lặp đi lặp lại nhiều lần.", answer: true },
+            { text: "d) Máy tính có thể tự động viết code hoàn chỉnh mà không cần sự thiết kế của con người.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Đơn vị đo lường thông tin): Xét dung lượng lưu trữ số liệu:`, statements: [
+            { text: "a) 1 Megabyte (MB) bằng 1024 Kilobyte (KB).", answer: true },
+            { text: "b) 1 Byte chỉ chứa được duy nhất 1 bit thông tin nhị phân.", answer: false },
+            { text: "c) 1 Terabyte (TB) lớn hơn 1 Gigabyte (GB).", answer: true },
+            { text: "d) Bit là đơn vị thông tin chỉ nhận một trong hai giá trị là 0 hoặc 1.", answer: true }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Đám mây và Chia sẻ dữ liệu): Xét dịch vụ điện toán đám mây:`, statements: [
+            { text: "a) Lưu trữ đám mây giúp bạn truy cập tệp tin ở bất kỳ đâu chỉ cần có mạng Internet.", answer: true },
+            { text: "b) Dữ liệu lưu trên Google Drive sẽ bị mất ngay khi bạn tắt nguồn máy tính.", answer: false },
+            { text: "c) Nhiều người có thể cùng lúc chỉnh sửa một văn bản chia sẻ trên Google Docs.", answer: true },
+            { text: "d) Không thể sao lưu ảnh và video từ điện thoại lên đám mây.", answer: false }
+          ]}),
+          (i) => ({ prompt: `Câu ${30 + i} (Đúng/Sai - Đạo đức và Pháp luật số): Xét văn hóa ứng xử trên không gian mạng:`, statements: [
+            { text: "a) Tôn trọng quyền tác giả và sở hữu trí tuệ khi sử dụng tài liệu trên mạng.", answer: true },
+            { text: "b) Được phép tự ý phát tán thông tin đời tư của bạn bè mà không cần sự đồng ý.", answer: false },
+            { text: "c) Luật An ninh mạng xử phạt nghiêm khắc hành vi tung tin giả mạo sai sự thật.", answer: true },
+            { text: "d) Sử dụng ngôn ngữ thù hận xúc phạm người khác trên mạng xã hội là bình thường.", answer: false }
+          ]})
         ]
       };
 
-      function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-
-      const genList = bankMCQ[subject] || bankMCQ["Toán Học"];
-      const tfList = tfTemplates[subject] || tfTemplates["Toán Học"];
+      const rawMCQ = allSubjectsMCQ[subject] || allSubjectsMCQ["Toán Học"];
+      const rawTF = allSubjectsTF[subject] || allSubjectsTF["Toán Học"];
 
       const mcq = [];
       for (let i = 0; i < 30; i++) {
-        const generator = genList[i % genList.length];
-        const raw = generator();
-        const optionsShuffled = shuffleArray(raw.o);
-        const correctTarget = raw.o[raw.c];
-        const correctIdx = optionsShuffled.indexOf(correctTarget);
+        const item = rawMCQ[i]();
+        const shuf = shuffleArray(item.o);
+        const correctTarget = item.o[item.c];
         mcq.push({
-          question: `Câu ${i + 1} (${subject} - Lớp ${grade}): ${raw.q}`,
-          options: optionsShuffled,
-          correct: correctIdx
+          question: `Câu ${i + 1} (${subject} - Lớp ${grade}): ${item.q}`,
+          options: shuf,
+          correct: shuf.indexOf(correctTarget)
         });
       }
 
       const tf = [];
       for (let i = 1; i <= 10; i++) {
-        const tfGen = tfList[(i - 1) % tfList.length];
-        tf.push(tfGen(i));
+        tf.push(rawTF[i - 1](i));
       }
 
       return { mcq, tf };
@@ -1379,10 +1747,7 @@ Yêu cầu: Sinh đủ 15 câu trắc nghiệm và 5 câu đúng sai tiêu biể
 
     // ================= TẠO 10 CÂU TRẮC NGHIỆM ĐẤU TRƯỜNG PVP =================
     async function fetchPvPQuestionsFromGemini(subjectTheme) {
-      const userKey = getActiveGeminiKey();
-      if (userKey) {
-        try {
-          const prompt = `Soạn 10 câu hỏi trắc nghiệm nhanh 4 lựa chọn (chỉ 1 đáp án đúng) cho đấu trường học sinh cấp 2 môn ${subjectTheme === 'Random' ? 'tổng hợp (Toán, Văn, Tiếng Anh, Lịch Sử - Địa Lý, Tin Học)' : subjectTheme}.
+      const prompt = `Soạn 10 câu hỏi trắc nghiệm nhanh 4 lựa chọn (chỉ 1 đáp án đúng) cho đấu trường học sinh cấp 2 môn ${subjectTheme === 'Random' ? 'tổng hợp (Toán, Văn, Tiếng Anh, Lịch Sử - Địa Lý, Tin Học)' : subjectTheme}.
 Trả về định dạng JSON thuần túy:
 [
   {
@@ -1392,20 +1757,13 @@ Trả về định dạng JSON thuần túy:
     "subject": "Tên môn"
   }
 ]`;
-          const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(userKey)}`;
-          const res = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-          });
-          if (res.ok) {
-            const data = await res.json();
-            const questions = JSON.parse(data.candidates[0].content.parts[0].text);
-            if (Array.isArray(questions) && questions.length >= 10) return questions.slice(0, 10);
-          }
-        } catch (e) {
-          console.warn("PvP Gemini AI bận, dùng ngân hàng tốc độ cao:", e);
+      try {
+        const onlineQ = await requestOnlineAI(prompt);
+        if (Array.isArray(onlineQ) && onlineQ.length >= 10) {
+          return onlineQ.slice(0, 10);
         }
+      } catch (e) {
+        console.warn("PvP Online AI bận, dùng ngân hàng dự phòng:", e);
       }
       return generateFallbackPvPQuestions(subjectTheme);
     }
@@ -1621,7 +1979,7 @@ Trả về định dạng JSON thuần túy:
       return true;
     }
 
-    // 1. Ghép đấu ngẫu nhiên (Đã fix lỗi lệch roomId)
+    // 1. Ghép đấu ngẫu nhiên
     async function startQuickMatchmaking() {
       if (!requireAuthForPvP()) return;
       const theme = document.getElementById("pvpSubjectSelect").value;
@@ -1639,7 +1997,6 @@ Trả về định dạng JSON thuần túy:
         if (data) {
           const now = Date.now();
           for (let key in data) {
-            // Chỉ nhận yêu cầu trong vòng 60 giây gần nhất
             if (data[key].uid !== window.currentUser.uid && (now - (data[key].timestamp || 0) < 60000)) {
               foundOpponent = data[key];
               opponentKey = key;
@@ -1649,7 +2006,6 @@ Trả về định dạng JSON thuần túy:
         }
 
         if (foundOpponent && opponentKey && foundOpponent.roomId) {
-          // Bắt cặp thành công: Người 2 tham gia đúng phòng của Người 1
           await window.dbRemove(window.dbRef(window.rtdb, `matchmaking_queue/${opponentKey}`));
           const targetRoomId = foundOpponent.roomId;
           isPvPHost = false;
@@ -1670,7 +2026,6 @@ Trả về định dạng JSON thuần túy:
           showToast("Đã tìm thấy đối thủ! Đang vào trận...", "emerald");
           listenToPvPRoom(targetRoomId);
         } else {
-          // Người 1 tạo phòng và xếp vào hàng chờ
           const myQueueKey = `queue_${window.currentUser.uid}`;
           const qList = await fetchPvPQuestionsFromGemini(theme);
           const roomId = Math.floor(100000 + Math.random() * 900000).toString();
@@ -1746,7 +2101,7 @@ Trả về định dạng JSON thuần túy:
       }
     }
 
-    // 3. Nhập mã PIN tham gia phòng bạn bè (Đã fix 100% lỗi tái sử dụng phòng cũ)
+    // 3. Nhập mã PIN tham gia phòng bạn bè (Chặn triệt để mã cũ)
     async function joinCustomRoom() {
       if (!requireAuthForPvP()) return;
       const pin = document.getElementById("joinPinInput").value.trim();
@@ -1766,21 +2121,17 @@ Trả về định dạng JSON thuần túy:
           return;
         }
 
-        // Chặn tuyệt đối nếu phòng đã kết thúc
         if (roomData.status === "finished") {
           showToast("Phòng này đã thi đấu xong và đã đóng! Vui lòng tạo phòng mới.", "rose");
-          // Tự động dọn dẹp phòng cũ trên Firebase
           window.dbRemove(roomRef).catch(() => {});
           return;
         }
 
-        // Chặn nếu phòng đã đủ 2 người hoặc đang thi đấu
         if (roomData.status === "playing") {
           showToast("Phòng này hiện đang trong trận thi đấu, không thể vào!", "amber");
           return;
         }
 
-        // Chặn phòng quá hạn 20 phút
         if (roomData.createdAt && (Date.now() - roomData.createdAt > 20 * 60 * 1000)) {
           showToast("Mã phòng này đã hết hạn hiệu lực (quá 20 phút)!", "rose");
           window.dbRemove(roomRef).catch(() => {});
@@ -1866,7 +2217,6 @@ Trả về định dạng JSON thuần túy:
         pvpRoomUnsubscribe = null;
       }
       
-      // Xóa phòng khi chủ phòng hoặc người chơi thoát về sảnh
       if (currentPvPRoomId && window.rtdb) {
         window.dbRemove(window.dbRef(window.rtdb, `pvp_rooms/${currentPvPRoomId}`)).catch(() => {});
       }
@@ -1886,7 +2236,6 @@ Trả về định dạng JSON thuần túy:
         const room = snapshot.val();
         if (!room) return;
 
-        // Tự động vào thi đấu khi đã có đủ 2 người chơi
         if (isPvPHost && room.player2 && room.status === "waiting") {
           window.dbUpdate(roomRef, { status: "playing" });
         }
@@ -1898,7 +2247,6 @@ Trả về định dạng JSON thuần túy:
             updatePvPProgressUI(room);
           }
 
-          // Kiểm tra nếu cả hai người chơi đều đã hoàn thành 10 câu thì kết thúc trận đấu
           if (room.player1?.finished && room.player2?.finished) {
             window.dbUpdate(roomRef, { status: "finished" });
           }
@@ -2020,7 +2368,6 @@ Trả về định dạng JSON thuần túy:
       }, 500);
     }
 
-    // Đã fix lỗi ép kết thúc: người hoàn thành trước sẽ chờ đối thủ làm xong công bằng
     async function finishMyPvPTurn() {
       clearInterval(pvpQuestionTimerInterval);
       const myRole = isPvPHost ? 'player1' : 'player2';
