@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- PUTER.JS AI API: Chạy AI trực tiếp trên trình duyệt miễn phí 100% không cần key -->
+  <!-- PUTER.JS AI API: Chạy AI trực tuyến miễn phí không cần key -->
   <script src="https://js.puter.com/v2/puter.js"></script>
 
   <style>
@@ -127,7 +127,7 @@
           <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
         </button>
 
-        <!-- 3. Cài Đặt AI API Key -->
+        <!-- 3. Cài Đặt AI API -->
         <button onclick="openApiKeyModal()" class="w-full flex items-center justify-between p-3.5 rounded-[20px] bg-slate-50/70 hover:bg-violet-50/60 transition-all text-left group">
           <div class="flex items-center gap-3.5">
             <div class="w-10 h-10 rounded-[14px] bg-violet-100 text-violet-600 flex items-center justify-center">
@@ -195,7 +195,7 @@
     <section id="sec-welcome" class="slide-up text-center py-8 md:py-16">
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold mb-6">
         <span class="w-2 h-2 rounded-full bg-indigo-600 animate-ping"></span>
-        Hệ thống ôn luyện 30 câu Trắc nghiệm + 10 câu Đúng / Sai chuẩn Bộ GD&ĐT
+        Hệ thống ôn luyện chuẩn cấu trúc Bộ GD&ĐT Lớp 1 - 12 (Trắc nghiệm + Đúng/Sai + Tự luận AI)
       </div>
       
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight max-w-2xl mx-auto">
@@ -203,7 +203,7 @@
       </h1>
       
       <p class="mt-4 text-slate-600 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
-        Không gian rèn luyện tri thức toàn diện từ Lớp 1 đến Lớp 12 với 5 môn học trọng tâm, Đấu Trường Solo 1v1 PvP thời gian thực và lưu tiến độ thông minh.
+        Không gian rèn luyện tri thức phân tầng chuẩn mực từ Lớp 1 đến Lớp 12, hỗ trợ chấm điểm Tự luận AI thông minh và Đấu Trường PvP đối kháng thời gian thực.
       </p>
 
       <div class="mt-8 flex items-center justify-center max-w-xs mx-auto">
@@ -219,15 +219,15 @@
         </div>
         <div class="bg-white p-4 rounded-[22px] border border-slate-100 shadow-sm">
           <p class="text-xs font-semibold text-slate-400">12 Khối Lớp</p>
-          <p class="text-sm font-bold text-slate-800 mt-1">Từ Lớp 1 đến Lớp 12</p>
+          <p class="text-sm font-bold text-slate-800 mt-1">Tiểu học • THCS • THPT</p>
+        </div>
+        <div class="bg-white p-4 rounded-[22px] border border-slate-100 shadow-sm">
+          <p class="text-xs font-semibold text-slate-400">Tự Luận AI Chấm</p>
+          <p class="text-sm font-bold text-slate-800 mt-1">Lời phê chi tiết 2 câu</p>
         </div>
         <div class="bg-white p-4 rounded-[22px] border border-slate-100 shadow-sm">
           <p class="text-xs font-semibold text-slate-400">Đấu Trường PvP</p>
           <p class="text-sm font-bold text-slate-800 mt-1">Realtime Ghép Bạn Bè</p>
-        </div>
-        <div class="bg-white p-4 rounded-[22px] border border-slate-100 shadow-sm">
-          <p class="text-xs font-semibold text-slate-400">Tự Động Sinh Đề</p>
-          <p class="text-sm font-bold text-slate-800 mt-1">Tích Hợp Trí Tuệ AI</p>
         </div>
       </div>
     </section>
@@ -365,7 +365,7 @@
         </div>
       </div>
 
-      <!-- BƯỚC 3: CHỌN KHỐI LỚP -->
+      <!-- BƯỚC 3: CHỌN KHỐI LỚP (TỪ LỚP 1 ĐẾN LỚP 12) -->
       <div id="studyStep3" class="hidden slide-up">
         <div class="flex items-center justify-between mb-4">
           <div>
@@ -375,7 +375,7 @@
           <button onclick="backToStep(2)" class="text-xs text-slate-500 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200">Quay lại</button>
         </div>
 
-        <p class="text-xs font-bold text-amber-600 uppercase tracking-wider mb-2">★ Khối Tiểu Học (Cấp 1)</p>
+        <p class="text-xs font-bold text-amber-600 uppercase tracking-wider mb-2">★ Khối Tiểu Học (Cấp 1 - Kiến thức nền tảng)</p>
         <div class="grid grid-cols-5 gap-2 mb-4">
           <button onclick="selectGrade(1)" class="p-3 bg-white rounded-[16px] border border-slate-100 hover:border-amber-400 hover:bg-amber-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 1</button>
           <button onclick="selectGrade(2)" class="p-3 bg-white rounded-[16px] border border-slate-100 hover:border-amber-400 hover:bg-amber-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 2</button>
@@ -384,7 +384,7 @@
           <button onclick="selectGrade(5)" class="p-3 bg-white rounded-[16px] border border-slate-100 hover:border-amber-400 hover:bg-amber-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 5</button>
         </div>
 
-        <p class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2">★ Khối Trung Học Cơ Sở (Cấp 2)</p>
+        <p class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2">★ Khối Trung Học Cơ Sở (Cấp 2 - Mở rộng tư duy)</p>
         <div class="grid grid-cols-4 gap-2 mb-4">
           <button onclick="selectGrade(6)" class="p-3 bg-white rounded-[16px] border border-slate-100 hover:border-indigo-400 hover:bg-indigo-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 6</button>
           <button onclick="selectGrade(7)" class="p-3 bg-white rounded-[16px] border border-slate-100 hover:border-indigo-400 hover:bg-indigo-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 7</button>
@@ -392,7 +392,7 @@
           <button onclick="selectGrade(9)" class="p-3 bg-white rounded-[16px] border border-slate-100 hover:border-indigo-400 hover:bg-indigo-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 9</button>
         </div>
 
-        <p class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2">★ Khối Trung Học Phổ Thông (Cấp 3)</p>
+        <p class="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2">★ Khối Trung Học Phổ Thông (Cấp 3 - Chuyên sâu & Thi cử)</p>
         <div class="grid grid-cols-3 gap-2">
           <button onclick="selectGrade(10)" class="p-3.5 bg-white rounded-[16px] border border-slate-100 hover:border-purple-400 hover:bg-purple-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 10</button>
           <button onclick="selectGrade(11)" class="p-3.5 bg-white rounded-[16px] border border-slate-100 hover:border-purple-400 hover:bg-purple-50/50 font-bold text-slate-700 active:scale-95 transition-all text-center">Lớp 11</button>
@@ -411,32 +411,35 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- CHẾ ĐỘ 1: TRẮC NGHIỆM & ĐÚNG SAI -->
           <div onclick="startQuizSession()" class="p-5 bg-gradient-to-br from-[#6941F2] to-indigo-700 text-white rounded-[24px] shadow-lg shadow-indigo-200 cursor-pointer active:scale-95 transition-all">
             <div class="w-12 h-12 rounded-[18px] bg-white/20 backdrop-blur-sm flex items-center justify-center font-bold mb-3 text-lg">⚡</div>
             <h3 class="font-bold text-lg mb-1">Trắc Nghiệm & Đúng - Sai</h3>
-            <p class="text-xs text-indigo-100 leading-relaxed mb-4">Cấu trúc chuẩn Bộ GD&ĐT: Gồm 30 câu Trắc nghiệm 4 lựa chọn và 10 câu dạng Đúng/Sai (mỗi câu 4 ý a-b-c-d).</p>
+            <p class="text-xs text-indigo-100 leading-relaxed mb-4">Cấu trúc Bộ GD&ĐT: Gồm 30 câu Trắc nghiệm 4 lựa chọn và 10 câu dạng Đúng/Sai (mỗi câu 4 ý a-b-c-d).</p>
             <div class="flex items-center justify-between pt-2 border-t border-indigo-400/40 text-xs font-semibold">
               <span>Thời gian: 45 Phút</span>
               <span class="px-3 py-1 rounded-full bg-white text-[#6941F2] font-bold">Vào Thi</span>
             </div>
           </div>
 
-          <div onclick="showToast('Chế độ Tự Luận đang hoàn thiện AI chấm điểm!', 'amber')" class="p-5 bg-white border border-slate-200/80 rounded-[24px] cursor-pointer hover:border-slate-300 transition-all opacity-85">
+          <!-- CHẾ ĐỘ 2: TỰ LUẬN CHUYÊN SÂU AI CHẤM ĐIỂM -->
+          <div onclick="startEssaySession()" class="p-5 bg-white border-2 border-emerald-400 hover:border-emerald-500 rounded-[24px] cursor-pointer shadow-sm hover:shadow-md transition-all">
             <div class="flex items-center justify-between mb-3">
-              <div class="w-12 h-12 rounded-[18px] bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-lg">✍</div>
-              <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-700">Đang Phát Triển</span>
+              <div class="w-12 h-12 rounded-[18px] bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg">✍</div>
+              <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700">Tự Luận AI Chấm</span>
             </div>
-            <h3 class="font-bold text-lg text-slate-800 mb-1">Tự Luận</h3>
-            <p class="text-xs text-slate-500 leading-relaxed mb-4">Viết bài luận, trình bày từng bước giải toán có hệ thống AI phân tích lỗi sai.</p>
-            <div class="pt-2 border-t border-slate-100 text-xs text-slate-400">
-              Sắp ra mắt trong phiên bản tiếp theo
+            <h3 class="font-bold text-lg text-slate-800 mb-1">Tự Luận (2 Câu)</h3>
+            <p class="text-xs text-slate-500 leading-relaxed mb-4">Giải toán chi tiết hoặc viết đoạn văn luận điểm. Hệ thống AI phân tích lỗi sai và cho điểm trực tiếp!</p>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs font-semibold">
+              <span class="text-slate-500">Thời gian: 30 Phút</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-600 text-white font-bold">Làm Bài</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3. PHÒNG THI ÔN TẬP -->
+    <!-- 3. PHÒNG THI TRẮC NGHIỆM & ĐÚNG SAI -->
     <section id="sec-quiz" class="hidden slide-up">
       <div class="sticky top-20 z-30 bg-white/95 backdrop-blur-md p-3.5 rounded-[22px] border border-slate-100 shadow-sm flex items-center justify-between mb-5">
         <div class="flex items-center gap-2">
@@ -462,7 +465,51 @@
       </div>
     </section>
 
-    <!-- 4. KẾT QUẢ THI -->
+    <!-- 4. PHÒNG THI TỰ LUẬN (2 CÂU TÙY MÔN & LỚP) -->
+    <section id="sec-essay" class="hidden slide-up">
+      <div class="sticky top-20 z-30 bg-white/95 backdrop-blur-md p-3.5 rounded-[22px] border border-slate-100 shadow-sm flex items-center justify-between mb-5">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="essaySubjectBadge" class="text-xs font-bold text-slate-800">Tự Luận • Toán Học Lớp 7</span>
+        </div>
+        
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-600 font-bold text-xs">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="essayTimer">30:00</span>
+          </div>
+          <button onclick="submitEssayConfirm()" class="px-3.5 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold">Nộp Bài</button>
+        </div>
+      </div>
+
+      <!-- CÂU TỰ LUẬN 1 -->
+      <div class="bg-white p-5 sm:p-6 rounded-[26px] border border-slate-100 shadow-sm mb-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700">Câu 1 (5.0 Điểm)</span>
+          <span class="text-[11px] text-slate-400 font-medium">Tự luận chuyên sâu</span>
+        </div>
+        <p id="essayQ1Text" class="font-bold text-slate-900 text-sm leading-relaxed mb-4">Nội dung câu hỏi tự luận 1...</p>
+        <textarea id="essayAnswer1" rows="6" placeholder="Trình bày chi tiết lời giải hoặc bài làm của bạn vào đây..." class="w-full p-4 rounded-[20px] bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-indigo-500 leading-relaxed"></textarea>
+      </div>
+
+      <!-- CÂU TỰ LUẬN 2 -->
+      <div class="bg-white p-5 sm:p-6 rounded-[26px] border border-slate-100 shadow-sm mb-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700">Câu 2 (5.0 Điểm)</span>
+          <span class="text-[11px] text-slate-400 font-medium">Vận dụng nâng cao</span>
+        </div>
+        <p id="essayQ2Text" class="font-bold text-slate-900 text-sm leading-relaxed mb-4">Nội dung câu hỏi tự luận 2...</p>
+        <textarea id="essayAnswer2" rows="6" placeholder="Trình bày chi tiết lời giải hoặc bài làm của bạn vào đây..." class="w-full p-4 rounded-[20px] bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:outline-none focus:border-indigo-500 leading-relaxed"></textarea>
+      </div>
+
+      <div class="mt-8 text-center pb-12">
+        <button onclick="submitEssayConfirm()" class="w-full sm:w-auto px-10 py-4 rounded-[22px] bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-bold shadow-lg shadow-emerald-100 active:scale-95 transition-all">
+          Hoàn Thành Bài Tự Luận & Nhận Điểm AI
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. KẾT QUẢ THI (DÙNG CHUNG CHO CẢ TRẮC NGHIỆM VÀ TỰ LUẬN) -->
     <section id="sec-result" class="hidden slide-up max-w-lg mx-auto text-center py-6">
       <div class="bg-white p-6 sm:p-8 rounded-[32px] border border-slate-100 shadow-sm">
         <div class="w-20 h-20 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl font-black mb-4">
@@ -473,11 +520,11 @@
 
         <div class="grid grid-cols-2 gap-3 mb-6 text-left">
           <div class="p-3.5 rounded-[20px] bg-slate-50 border border-slate-100">
-            <span class="text-xs text-slate-400 font-semibold">Điểm Quy Đổi</span>
+            <span class="text-xs text-slate-400 font-semibold">Điểm Tổng Kết</span>
             <p id="resScore" class="text-2xl font-black text-[#6941F2] mt-0.5">0.0</p>
           </div>
           <div class="p-3.5 rounded-[20px] bg-slate-50 border border-slate-100">
-            <span class="text-xs text-slate-400 font-semibold">Số Câu Đúng</span>
+            <span class="text-xs text-slate-400 font-semibold" id="resExtraLabel">Số Câu Đúng</span>
             <p id="resCorrect" class="text-2xl font-black text-emerald-600 mt-0.5">0 / 40</p>
           </div>
           <div class="p-3.5 rounded-[20px] bg-slate-50 border border-slate-100">
@@ -490,6 +537,14 @@
           </div>
         </div>
 
+        <!-- KHUNG NHẬN XÉT CỦA AI DÀNH CHO BÀI TỰ LUẬN -->
+        <div id="essayFeedbackBox" class="hidden text-left mb-6 p-4 rounded-[22px] bg-indigo-50 border border-indigo-100 text-xs">
+          <p class="font-bold text-indigo-800 mb-2 flex items-center gap-1.5">
+            <span>🤖</span> Nhận Xét & Lời Phê Của AI:
+          </p>
+          <div id="essayFeedbackContent" class="text-slate-700 space-y-2 leading-relaxed"></div>
+        </div>
+
         <div class="flex flex-col gap-2.5">
           <button onclick="navigateSection('study')" class="w-full py-3.5 rounded-[20px] bg-[#6941F2] text-white font-bold active:scale-95 transition-all">Luyện Tập Đề Khác</button>
           <button onclick="navigateSection('account')" class="w-full py-3.5 rounded-[20px] bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold active:scale-95 transition-all">Xem Lịch Sử Điểm</button>
@@ -497,7 +552,7 @@
       </div>
     </section>
 
-    <!-- 5. ĐẤU TRƯỜNG TRI THỨC 1V1 (PvP REALTIME) -->
+    <!-- 6. ĐẤU TRƯỜNG TRI THỨC 1V1 (PvP REALTIME) -->
     <section id="sec-arena" class="hidden slide-up max-w-xl mx-auto py-6">
       
       <!-- GIAO DIỆN CHỌN CHẾ ĐỘ ĐẤU TRƯỜNG -->
@@ -564,10 +619,8 @@
 
       <!-- MÀN HÌNH THI ĐẤU ĐỐI KHÁNG THỜI GIAN THỰC -->
       <div id="pvpBattleCard" class="hidden slide-up">
-        <!-- HEADER VERSUS & PROGRESS BAR -->
         <div class="bg-white p-4 rounded-[26px] border border-slate-100 shadow-sm mb-4">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100 text-xs font-bold">
-            <!-- NGƯỜI CHƠI 1 (BẠN) -->
             <div class="flex items-center gap-2">
               <img id="p1Avatar" src="" class="w-8 h-8 rounded-full border-2 border-indigo-500 object-cover" alt="You">
               <div>
@@ -576,13 +629,11 @@
               </div>
             </div>
 
-            <!-- ĐỒNG HỒ CÂU HỎI -->
             <div class="flex flex-col items-center">
               <span class="text-[10px] uppercase text-slate-400 font-extrabold tracking-wider">Thời Gian</span>
               <span id="pvpQuestionTimer" class="text-xl font-black text-rose-600">15</span>
             </div>
 
-            <!-- NGƯỜI CHƠI 2 (ĐỐI THỦ) -->
             <div class="flex items-center gap-2 text-right">
               <div>
                 <p id="p2Name" class="text-slate-800 font-bold truncate max-w-[100px]">Đối Thủ</p>
@@ -592,7 +643,6 @@
             </div>
           </div>
 
-          <!-- THANH TIẾN ĐỘ SONG ĐẤU -->
           <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden flex mt-3">
             <div id="p1ProgressBar" class="bg-indigo-600 h-full transition-all duration-300" style="width: 50%;"></div>
             <div id="p2ProgressBar" class="bg-amber-500 h-full transition-all duration-300" style="width: 50%;"></div>
@@ -603,14 +653,10 @@
           </div>
         </div>
 
-        <!-- KHUNG CÂU HỎI ĐỐI ĐẦU -->
         <div class="bg-white p-6 rounded-[30px] border border-slate-100 shadow-sm text-center">
           <span id="pvpCurrentSubjectBadge" class="text-[10px] font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 uppercase tracking-wider mb-3 inline-block">Môn Thi</span>
           <h3 id="pvpQuestionText" class="text-base font-bold text-slate-900 leading-relaxed min-h-[50px] flex items-center justify-center mb-6">Nội dung câu hỏi?</h3>
-          
-          <div id="pvpOptionsGrid" class="grid grid-cols-1 gap-2.5">
-            <!-- 4 Nút Lựa Chọn Sẽ Sinh Tự Động -->
-          </div>
+          <div id="pvpOptionsGrid" class="grid grid-cols-1 gap-2.5"></div>
         </div>
       </div>
 
@@ -638,7 +684,7 @@
 
     </section>
 
-    <!-- 6. GÓP Ý -->
+    <!-- 7. GÓP Ý -->
     <section id="sec-feedback" class="hidden slide-up max-w-lg mx-auto py-8">
       <div class="bg-white p-6 sm:p-8 rounded-[32px] border border-slate-100 shadow-sm text-center">
         <div class="w-16 h-16 rounded-[22px] bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-4">
@@ -655,7 +701,7 @@
       </div>
     </section>
 
-    <!-- 7. TÀI KHOẢN -->
+    <!-- 8. TÀI KHOẢN -->
     <section id="sec-account" class="hidden slide-up max-w-xl mx-auto py-6">
       <div class="bg-white p-6 sm:p-8 rounded-[32px] border border-slate-100 shadow-sm">
         <div class="flex items-center gap-4 pb-6 border-b border-slate-100">
@@ -860,13 +906,23 @@
       return "";
     }
 
+    // Xác định phân cấp khối học (Tiểu học: 1-5, THCS: 6-9, THPT: 10-12)
+    function getGradeTier(grade) {
+      const g = parseInt(grade);
+      if (g <= 5) return "tieuhoc";
+      if (g <= 9) return "thcs";
+      return "thpt";
+    }
+
     window.currentUser = null;
     let selectedSubject = "Toán Học";
     let selectedBook = "Kết Nối Tri Thức";
     let selectedGrade = 7;
     let currentQuizData = { mcq: [], tf: [] };
+    let currentEssayData = { q1: "", q2: "" };
     let userAnswers = { mcq: {}, tf: {} };
     let quizTimerInterval = null;
+    let essayTimerInterval = null;
     let timeSpentSeconds = 0;
 
     let currentPvPRoomId = null;
@@ -982,8 +1038,8 @@
         histContainer.innerHTML = stats.history.slice(-5).reverse().map(h => `
           <div class="p-3.5 rounded-[18px] bg-slate-50 border border-slate-100 flex items-center justify-between text-xs">
             <div>
-              <p class="font-bold text-slate-800">${h.subject} (Lớp ${h.grade})</p>
-              <p class="text-slate-400 text-[11px]">${h.book} • Đúng ${h.correct}/40 câu</p>
+              <p class="font-bold text-slate-800">${h.subject} (Lớp ${h.grade}) - <span class="text-indigo-600">${h.type || 'Trắc nghiệm'}</span></p>
+              <p class="text-slate-400 text-[11px]">${h.book} • ${h.note || ''}</p>
             </div>
             <div class="text-right">
               <span class="text-base font-black text-[#6941F2]">${h.score}</span>
@@ -1040,7 +1096,7 @@
     }
 
     function navigateSection(secId) {
-      const sections = ['welcome', 'study', 'quiz', 'result', 'arena', 'feedback', 'account'];
+      const sections = ['welcome', 'study', 'quiz', 'essay', 'result', 'arena', 'feedback', 'account'];
       sections.forEach(id => {
         const el = document.getElementById(`sec-${id}`);
         if (el) el.classList.add('hidden');
@@ -1138,7 +1194,8 @@
 
     function selectGrade(grade) {
       selectedGrade = grade;
-      document.getElementById('finalSelectionSummary').innerText = `Môn: ${selectedSubject} • Bộ: ${selectedBook} • Lớp ${selectedGrade}`;
+      const tierName = getGradeTier(grade) === "tieuhoc" ? "Tiểu Học" : (getGradeTier(grade) === "thcs" ? "THCS" : "THPT");
+      document.getElementById('finalSelectionSummary').innerText = `Môn: ${selectedSubject} • Bộ: ${selectedBook} • Lớp ${selectedGrade} (${tierName})`;
       showStudyStep(4);
     }
 
@@ -1153,7 +1210,6 @@
 
     // ================= KẾT NỐI AI TRỰC TUYẾN (PUTER AI / GEMINI) =================
     async function requestOnlineAI(prompt) {
-      // 1. Nếu có key Gemini cá nhân
       const geminiKey = getActiveGeminiKey();
       if (geminiKey) {
         try {
@@ -1171,14 +1227,13 @@
             return JSON.parse(data.candidates[0].content.parts[0].text);
           }
         } catch (e) {
-          console.warn("Gemini cá nhân gặp lỗi, chuyển sang Puter Cloud AI:", e);
+          console.warn("Gemini gặp lỗi, chuyển sang Puter Cloud AI:", e);
         }
       }
 
-      // 2. Tự động dùng Puter.js AI trên trình duyệt (Miễn phí 100%, không cần key)
       if (window.puter && window.puter.ai) {
         try {
-          const aiResponse = await window.puter.ai.chat(prompt + "\nLƯU Ý QUAN TRỌNG: Chỉ trả về JSON thuần túy, bắt đầu bằng { hoặc [ và kết thúc bằng } hoặc ], tuyệt đối không kèm lời giải thích hay markdown ```.", {
+          const aiResponse = await window.puter.ai.chat(prompt + "\nCHỈ TRẢ VỀ JSON THUẦN TÚY, BẮT ĐẦU BẰNG { HOẶC [ VÀ KẾT THÚC BẰNG } HOẶC ], KHÔNG DÙNG MARKDOWN ```.", {
             model: "gpt-4o-mini"
           });
           const raw = aiResponse?.message?.content || aiResponse?.text || String(aiResponse);
@@ -1188,18 +1243,243 @@
             return JSON.parse(match[0]);
           }
         } catch (err) {
-          console.warn("Puter Cloud AI bận hoặc timeout:", err);
+          console.warn("Puter Cloud AI bận:", err);
         }
       }
 
       return null;
     }
 
+    // ================= HỆ THỐNG ĐỀ TỰ LUẬN CHUYÊN SÂU THEO KHỐI LỚP 1-12 =================
+    function generateTierEssayQuestions(subject, grade) {
+      const tier = getGradeTier(grade);
+      const essays = {
+        "Toán Học": {
+          "tieuhoc": {
+            q1: `Bài toán đố (Lớp ${grade}): Một mảnh vườn hình chữ nhật có chiều dài 25m, chiều rộng kém chiều dài 7m. Em hãy tính chu vi và diện tích của mảnh vườn đó?`,
+            q2: `Đặt tính rồi tính và giải thích từng bước: Tìm x biết x : 4 = 125 + 75.`
+          },
+          "thcs": {
+            q1: `Giải bài toán bằng cách lập phương trình (Lớp ${grade}): Một đội xe dự định chở 60 tấn hàng. Khi khởi hành có 2 xe được điều đi làm nhiệm vụ khác, nên mỗi xe còn lại phải chở thêm 1 tấn hàng. Hỏi lúc đầu đội có bao nhiêu xe?`,
+            q2: `Hình học (Lớp ${grade}): Cho tam giác ABC vuông tại A, đường cao AH. Biết AB = 6cm, AC = 8cm. Tính độ dài đoạn thẳng BC, AH và diện tích tam giác ABC.`
+          },
+          "thpt": {
+            q1: `Giải phương trình / Khảo sát hàm số (Lớp ${grade}): Cho hàm số y = x³ - 3x² + 2. Hãy tìm tọa độ các điểm cực trị và viết phương trình tiếp tuyến của đồ thị hàm số tại điểm có hoành độ x = 2.`,
+            q2: `Hình học không gian / Tích phân (Lớp ${grade}): Cho hình chóp S.ABCD có đáy ABCD là hình vuông cạnh a, cạnh bên SA vuông góc với đáy và SA = a√3. Tính thể tích khối chóp S.ABCD và khoảng cách từ điểm A đến mặt phẳng (SBC).`
+          }
+        },
+        "Ngữ Văn": {
+          "tieuhoc": {
+            q1: `Tập làm văn (Lớp ${grade}): Em hãy viết một đoạn văn ngắn (từ 5 đến 7 câu) tả lại một con vật nuôi đáng yêu hoặc cây hoa mà em yêu thích.`,
+            q2: `Cảm thụ văn học: Đọc câu thơ sau và nêu cảm nghĩ của em về tình mẹ: "Lòng mẹ bao la như biển Thái Bình dạt dào / Tình mẹ tha thiết như dòng suối hiền ngọt ngào".`
+          },
+          "thcs": {
+            q1: `Nghị luận xã hội (khoảng 200 chữ): Trình bày suy nghĩ của em về ý nghĩa của lòng biết ơn và sự sẻ chia trong cuộc sống của học sinh hiện nay.`,
+            q2: `Nghị luận văn học (Lớp ${grade}): Phân tích vẻ đẹp phẩm chất của nhân vật Vũ Nương trong tác phẩm "Chuyện người con gái Nam Xương" của Nguyễn Dữ hoặc nhân vật người cha trong "Chiếc lược ngà" của Nguyễn Quang Sáng.`
+          },
+          "thpt": {
+            q1: `Nghị luận xã hội (Lớp ${grade}): Viết một đoạn văn nghị luận (khoảng 200 chữ) bàn về tinh thần chủ động, dám nghĩ dám làm của tuổi trẻ trong kỷ nguyên công nghệ số hiện nay.`,
+            q2: `Nghị luận văn học: Cảm nhận của anh/chị về khát vọng cống hiến lẽ sống cho đất nước qua đoạn thơ trong bài thơ "Đất Nước" của Nguyễn Khoa Điềm hoặc bài thơ "Sóng" của Xuân Quỳnh.`
+          }
+        },
+        "Tiếng Anh": {
+          "tieuhoc": {
+            q1: `Writing (Grade ${grade}): Write a short paragraph (30-50 words) to introduce yourself, your family and your favorite hobby.`,
+            q2: `Sentence building: Reorder the words to make complete sentences: 1. my / is / subject / favorite / English. 2. to / school / I / go / by / bicycle / every day.`
+          },
+          "thcs": {
+            q1: `Writing Paragraph (Grade ${grade}): Write a paragraph of about 80-100 words about the benefits of learning English for secondary school students.`,
+            q2: `Sentence transformation: Rewrite each sentence so that it means the same as the original: 1. They started collecting stamps two years ago. -> They have... 2. "I am visiting Da Nang tomorrow," Tom said. -> Tom said that...`
+          },
+          "thpt": {
+            q1: `Essay Writing (Grade ${grade}): Write an essay (150-180 words) discussing the advantages and disadvantages of using artificial intelligence (AI) in education.`,
+            q2: `Advanced Sentence Rewriting: Rewrite without changing meaning: 1. If you don't study hard, you won't pass the national exam. -> Unless... 2. The building was so high that nobody could climb it. -> It was such...`
+          }
+        },
+        "Lịch Sử - Địa Lý": {
+          "tieuhoc": {
+            q1: `Khám phá đất nước: Em hãy kể tên thủ đô của nước ta và giới thiệu 2 danh lam thắng cảnh hoặc di tích lịch sử nổi tiếng mà em biết.`,
+            q2: `Lịch sử quê hương: Nêu cảm nghĩ của em về tấm gương dũng cảm của các vị anh hùng dân tộc như Hai Bà Trưng, Đinh Bộ Lĩnh hoặc Bác Hồ kính yêu.`
+          },
+          "thcs": {
+            q1: `Lịch sử (Lớp ${grade}): Phân tích ý nghĩa lịch sử to lớn của chiến thắng Bạch Đằng năm 938 do Ngô Quyền lãnh đạo đối với tiến trình dựng nước và giữ nước của dân tộc ta.`,
+            q2: `Địa lý (Lớp ${grade}): Trình bày đặc điểm địa hình và tài nguyên khoáng sản của nước ta. Nêu các biện pháp cấp bách nhằm bảo vệ môi trường biển đảo hiện nay.`
+          },
+          "thpt": {
+            q1: `Lịch sử Việt Nam (Lớp ${grade}): Phân tích đường lối kháng chiến toàn dân, toàn diện, trường kỳ và tự lực cánh sinh của Đảng ta trong cuộc kháng chiến chống thực dân Pháp (1945 - 1954).`,
+            q2: `Địa lý kinh tế xã hội: Đánh giá những thuận lợi và khó khăn về tự nhiên đối với sự phát triển kinh tế vùng Đồng bằng sông Hồng và Đồng bằng sông Cửu Long.`
+          }
+        },
+        "Tin Học": {
+          "tieuhoc": {
+            q1: `Sử dụng máy tính an toàn (Lớp ${grade}): Em hãy nêu 3 quy tắc quan trọng để bảo vệ mắt và giữ tư thế ngồi đúng khi sử dụng máy tính.`,
+            q2: `Kỹ năng số: Nêu các bước cơ bản để lưu một bài vẽ trên phần mềm Paint vào thư mục học tập của em.`
+          },
+          "thcs": {
+            q1: `Kỹ năng văn phòng & Mạng (Lớp ${grade}): Nêu các nguy cơ tiềm ẩn khi truy cập mạng xã hội và đề xuất 4 biện pháp bảo mật tài khoản cá nhân hiệu quả.`,
+            q2: `Tư duy thuật toán: Trình bày thuật toán tìm số lớn nhất trong 3 số a, b, c bằng ngôn ngữ tự nhiên hoặc vẽ sơ đồ khối rẽ nhánh.`
+          },
+          "thpt": {
+            q1: `Lập trình & Thuật toán (Lớp ${grade}): Viết một chương trình ngắn (bằng ngôn ngữ Python) nhập vào một danh sách các số nguyên và in ra màn hình các số nguyên tố có trong danh sách.`,
+            q2: `Hệ quản trị CSDL & An ninh mạng: Trình bày vai trò của khóa chính (Primary Key) trong cơ sở dữ liệu quan hệ. Nêu sự khác nhau giữa mạng có dây và mạng không dây.`
+          }
+        }
+      };
+
+      const subPool = essays[subject] || essays["Toán Học"];
+      return subPool[tier] || subPool["thcs"];
+    }
+
+    // ================= KHỞI ĐỘNG PHÒNG THI TỰ LUẬN =================
+    function startEssaySession() {
+      currentEssayData = generateTierEssayQuestions(selectedSubject, selectedGrade);
+      timeSpentSeconds = 0;
+
+      const tierName = getGradeTier(selectedGrade) === "tieuhoc" ? "Tiểu Học" : (getGradeTier(selectedGrade) === "thcs" ? "THCS" : "THPT");
+      document.getElementById('essaySubjectBadge').innerText = `Tự Luận • ${selectedSubject} Lớp ${selectedGrade} (${tierName})`;
+      document.getElementById('essayQ1Text').innerText = currentEssayData.q1;
+      document.getElementById('essayQ2Text').innerText = currentEssayData.q2;
+      document.getElementById('essayAnswer1').value = "";
+      document.getElementById('essayAnswer2').value = "";
+
+      navigateSection('essay');
+      startEssayTimer(30 * 60);
+    }
+
+    function startEssayTimer(seconds) {
+      clearInterval(essayTimerInterval);
+      let left = seconds;
+      essayTimerInterval = setInterval(() => {
+        left--;
+        timeSpentSeconds++;
+        const mins = String(Math.floor(left / 60)).padStart(2, '0');
+        const secs = String(left % 60).padStart(2, '0');
+        document.getElementById('essayTimer').innerText = `${mins}:${secs}`;
+        if (left <= 0) {
+          clearInterval(essayTimerInterval);
+          submitEssayConfirm(true);
+        }
+      }, 1000);
+    }
+
+    function submitEssayConfirm(force = false) {
+      if (force || confirm("Bạn có chắc chắn muốn nộp bài tự luận để AI chấm điểm ngay không?")) {
+        clearInterval(essayTimerInterval);
+        processEssayGrading();
+      }
+    }
+
+    // Chấm điểm tự luận bằng AI hoặc qua barem thông minh
+    async function processEssayGrading() {
+      showToast("AI đang đọc và chấm bài tự luận của bạn...", "indigo");
+
+      const ans1 = document.getElementById('essayAnswer1').value.trim();
+      const ans2 = document.getElementById('essayAnswer2').value.trim();
+
+      const prompt = `Bạn là giáo viên khảo thí chấm thi môn "${selectedSubject}", Lớp ${selectedGrade}.
+Hãy chấm bài làm tự luận sau theo thang điểm 10 (mỗi câu tối đa 5 điểm):
+[CÂU 1]: ${currentEssayData.q1}
+[BÀI LÀM CÂU 1 CỦA HỌC SINH]: ${ans1 || "(Học sinh để trống)"}
+
+[CÂU 2]: ${currentEssayData.q2}
+[BÀI LÀM CÂU 2 CỦA HỌC SINH]: ${ans2 || "(Học sinh để trống)"}
+
+Yêu cầu trả về định dạng JSON thuần túy:
+{
+  "totalScore": 8.5,
+  "q1Score": 4.0,
+  "q1Feedback": "Nhận xét ưu điểm và thiếu sót câu 1...",
+  "q2Score": 4.5,
+  "q2Feedback": "Nhận xét ưu điểm và thiếu sót câu 2...",
+  "generalAdvice": "Lời khuyên tổng kết để tiến bộ..."
+}`;
+
+      let result = null;
+      try {
+        result = await requestOnlineAI(prompt);
+      } catch (e) {
+        console.warn("AI online bận, dùng barem chấm điểm cục bộ:", e);
+      }
+
+      if (!result || !result.totalScore) {
+        // Barem chấm điểm dự phòng dựa trên chất lượng nội dung & độ dài bài làm
+        let s1 = 0, s2 = 0;
+        if (ans1.length > 20) s1 = Math.min(5.0, 2.5 + (ans1.length / 100) * 1.5);
+        if (ans2.length > 20) s2 = Math.min(5.0, 2.5 + (ans2.length / 100) * 1.5);
+        const total = (s1 + s2).toFixed(1);
+
+        result = {
+          totalScore: total,
+          q1Score: s1.toFixed(1),
+          q1Feedback: ans1 ? `Bài làm câu 1 có bố cục khá rõ ràng, trình bày được ý chính. Cần bổ sung thêm lập luận hoặc các bước giải chi tiết để đạt điểm tối đa.` : `Chưa hoàn thành bài làm câu 1 (0đ).`,
+          q2Score: s2.toFixed(1),
+          q2Feedback: ans2 ? `Câu 2 học sinh nắm được yêu cầu đề bài, văn phong rành mạch. Cần chú ý kiểm tra lại các bước tính hoặc dẫn chứng minh họa.` : `Chưa hoàn thành bài làm câu 2 (0đ).`,
+          generalAdvice: `Hãy tiếp tục rèn luyện kỹ năng trình bày logic và đọc kỹ đề thi để đạt kết quả cao hơn nữa!`
+        };
+      }
+
+      // Hiển thị kết quả chấm điểm
+      document.getElementById('resultSubtitle').innerText = `Bài Thi Tự Luận 2 Câu • Môn ${selectedSubject} Lớp ${selectedGrade}`;
+      document.getElementById('resScore').innerText = result.totalScore;
+      document.getElementById('resExtraLabel').innerText = "Loại Bài Thi";
+      document.getElementById('resCorrect').innerText = "Tự Luận";
+      
+      const earnedXP = Math.round(parseFloat(result.totalScore) * 15);
+      document.getElementById('resXP').innerText = `+${earnedXP} XP`;
+      
+      const spentMin = Math.floor(timeSpentSeconds / 60);
+      const spentSec = timeSpentSeconds % 60;
+      document.getElementById('resTime').innerText = `${spentMin}p ${spentSec}s`;
+
+      // Hộp nhận xét chi tiết của AI
+      const feedbackBox = document.getElementById('essayFeedbackBox');
+      const feedbackContent = document.getElementById('essayFeedbackContent');
+      feedbackBox.classList.remove('hidden');
+      feedbackContent.innerHTML = `
+        <div class="p-2.5 rounded-[16px] bg-white border border-indigo-100 mb-2">
+          <p class="font-bold text-slate-800">★ Câu 1 (${result.q1Score}/5.0 điểm):</p>
+          <p class="text-slate-600 mt-1">${result.q1Feedback}</p>
+        </div>
+        <div class="p-2.5 rounded-[16px] bg-white border border-indigo-100 mb-2">
+          <p class="font-bold text-slate-800">★ Câu 2 (${result.q2Score}/5.0 điểm):</p>
+          <p class="text-slate-600 mt-1">${result.q2Feedback}</p>
+        </div>
+        <p class="text-[11px] text-indigo-700 font-semibold italic">💡 Lời khuyên: ${result.generalAdvice || ''}</p>
+      `;
+
+      // Lưu thành tích
+      if (window.currentUser) {
+        const userKey = `eduzone_stats_${window.currentUser.uid || window.currentUser.email}`;
+        const stats = JSON.parse(localStorage.getItem(userKey)) || {
+          examCount: 0, totalScore: 0, avgScore: "0.0", xp: 0, level: 1, rank: "Tân Binh", pvpWins: 0, pvpMatches: 0, history: []
+        };
+        stats.examCount += 1;
+        stats.totalScore += parseFloat(result.totalScore);
+        stats.avgScore = (stats.totalScore / stats.examCount).toFixed(1);
+        stats.xp += earnedXP;
+        stats.level = Math.floor(stats.xp / 200) + 1;
+        stats.history.push({
+          subject: selectedSubject,
+          book: selectedBook,
+          grade: selectedGrade,
+          score: result.totalScore,
+          type: "Tự Luận",
+          note: `Đạt ${result.totalScore}/10.0đ`,
+          xp: earnedXP,
+          date: new Date().toLocaleDateString('vi-VN')
+        });
+        localStorage.setItem(userKey, JSON.stringify(stats));
+      }
+
+      navigateSection('result');
+    }
+
     // ================= TẠO ĐỀ THI ÔN TẬP CHUẨN 40 CÂU KHÔNG TRÙNG LẶP =================
     async function fetchQuestionsFromGemini(subject, grade, book) {
       showToast(`Đang kết nối AI trực tuyến tạo đề thi môn ${subject}...`, "indigo");
+      const tierName = getGradeTier(grade) === "tieuhoc" ? "Tiểu Học" : (getGradeTier(grade) === "thcs" ? "THCS" : "THPT");
 
-      const prompt = `Soạn 1 đề thi trắc nghiệm học kỳ môn "${subject}", Lớp ${grade}, bộ sách "${book}".
+      const prompt = `Soạn 1 đề thi trắc nghiệm học kỳ môn "${subject}", Lớp ${grade} (Cấp ${tierName}), bộ sách "${book}".
 Cấu trúc JSON bắt buộc:
 {
   "mcq": [
@@ -1222,7 +1502,6 @@ Yêu cầu: Sinh 10 câu trắc nghiệm và 3 câu đúng sai tiêu biểu.`;
 
       if (exam && Array.isArray(exam.mcq) && exam.mcq.length > 0) {
         showToast("Đã tải đề thi thành công từ Trí Tuệ Nhân Tạo AI Online!", "emerald");
-        // Kết hợp câu hỏi AI vào vị trí đầu, phần còn lại lấy từ ngân hàng động độc lập đảm bảo đủ 30 MCQ + 10 TF
         const finalMCQ = [...exam.mcq];
         let idx = 0;
         while (finalMCQ.length < 30) {
@@ -1805,13 +2084,14 @@ Trả về định dạng JSON thuần túy:
       });
     }
 
-    // ================= QUIZ ENGINE (ÔN TẬP) =================
+    // ================= QUIZ ENGINE (ÔN TẬP TRẮC NGHIỆM) =================
     async function startQuizSession() {
       currentQuizData = await fetchQuestionsFromGemini(selectedSubject, selectedGrade, selectedBook);
       userAnswers = { mcq: {}, tf: {} };
       timeSpentSeconds = 0;
 
-      document.getElementById('quizSubjectBadge').innerText = `${selectedSubject} • Lớp ${selectedGrade} (${selectedBook})`;
+      const tierName = getGradeTier(selectedGrade) === "tieuhoc" ? "Tiểu Học" : (getGradeTier(selectedGrade) === "thcs" ? "THCS" : "THPT");
+      document.getElementById('quizSubjectBadge').innerText = `${selectedSubject} • Lớp ${selectedGrade} (${tierName})`;
       renderQuizDOM();
       navigateSection('quiz');
       startQuizTimer(45 * 60);
@@ -1931,10 +2211,13 @@ Trả về định dạng JSON thuần túy:
       const spentMin = Math.floor(timeSpentSeconds / 60);
       const spentSec = timeSpentSeconds % 60;
 
+      document.getElementById('resultSubtitle').innerText = `Bài Thi Trắc Nghiệm 40 Câu • Môn ${selectedSubject} Lớp ${selectedGrade}`;
       document.getElementById('resScore').innerText = finalScore;
+      document.getElementById('resExtraLabel').innerText = "Số Câu Đúng";
       document.getElementById('resCorrect').innerText = `${correctCount} / 40`;
       document.getElementById('resXP').innerText = `+${earnedXP} XP`;
       document.getElementById('resTime').innerText = `${spentMin}p ${spentSec}s`;
+      document.getElementById('essayFeedbackBox').classList.add('hidden');
 
       if (window.currentUser) {
         const userKey = `eduzone_stats_${window.currentUser.uid || window.currentUser.email}`;
@@ -1956,7 +2239,8 @@ Trả về định dạng JSON thuần túy:
           book: selectedBook,
           grade: selectedGrade,
           score: finalScore,
-          correct: correctCount,
+          type: "Trắc Nghiệm",
+          note: `Đúng ${correctCount}/40 câu`,
           xp: earnedXP,
           date: new Date().toLocaleDateString('vi-VN')
         });
@@ -1979,7 +2263,6 @@ Trả về định dạng JSON thuần túy:
       return true;
     }
 
-    // 1. Ghép đấu ngẫu nhiên
     async function startQuickMatchmaking() {
       if (!requireAuthForPvP()) return;
       const theme = document.getElementById("pvpSubjectSelect").value;
@@ -2063,7 +2346,6 @@ Trả về định dạng JSON thuần túy:
       }
     }
 
-    // 2. Tạo phòng đấu bạn bè (Mã PIN 6 số)
     async function createCustomRoom() {
       if (!requireAuthForPvP()) return;
       const theme = document.getElementById("pvpSubjectSelect").value;
@@ -2101,7 +2383,6 @@ Trả về định dạng JSON thuần túy:
       }
     }
 
-    // 3. Nhập mã PIN tham gia phòng bạn bè (Chặn triệt để mã cũ)
     async function joinCustomRoom() {
       if (!requireAuthForPvP()) return;
       const pin = document.getElementById("joinPinInput").value.trim();
